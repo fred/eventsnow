@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="<%=meta_language%>" xml:lang="<%=meta_language%>">
+  <head>
+    <meta http-equiv="content-language" content="<%=meta_language%>">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=100; IE=8" >
+    <meta name="keywords" content="<%= Settings.site_meta_keywords.to_s + @keywords.to_s %>" />
+    <meta name="description" content="<%= Settings.site_meta_description.to_s + @description.to_s %>" />
+    <meta name="title" content="<%= Settings.site_meta_title.to_s + @title.to_s %>" />
+    <title> <%= @title || Settings.site_meta_title.to_s %> </title>
+    <%= stylesheet_link_tag 'application' %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div id="container">
+      <%- flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <%- end -%>
+      
+      <%- if show_title? -%>
+        <h1><%=h yield(:title) %></h1>
+      <%- end -%>
+      
+      <%= yield %>
+      <% if current_user %>
+        <p> 
+          <%= link_to("Admin", admin_path) %> 
+          <%= link_to("Account", account_path) %>
+          <%= link_to("Logout", logout_path) %>
+        </p>
+      <% end %>
+      <p> <%= link_to "Mobile", :mobile => true %> </p>
+    </div>
+    <%= render :partial => "/shared/license" %>
+  </body>
+</html>
