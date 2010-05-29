@@ -9,7 +9,91 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100524072059) do
+ActiveRecord::Schema.define(:version => 20100527082021) do
+
+  create_table "events", :force => true do |t|
+    t.string   "title"
+    t.string   "phone_number"
+    t.text     "description"
+    t.text     "extra_description"
+    t.text     "location"
+    t.text     "cil_code"
+    t.text     "cil_code_mobile"
+    t.integer  "author_id"
+    t.integer  "speaker_type",                        :default => 0
+    t.integer  "speakers_count",                      :default => 1
+    t.integer  "maximum_users"
+    t.float    "price"
+    t.float    "lat"
+    t.float    "lng"
+    t.boolean  "show_map",                            :default => false
+    t.boolean  "active",                              :default => true
+    t.boolean  "public_event",                        :default => true
+    t.boolean  "private_event",                       :default => false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "document1_file_name"
+    t.string   "document1_content_type"
+    t.integer  "document1_file_size"
+    t.datetime "document1_updated_at"
+    t.string   "document2_file_name"
+    t.string   "document2_content_type"
+    t.integer  "document2_file_size"
+    t.datetime "document2_updated_at"
+    t.string   "document3_file_name"
+    t.string   "document3_content_type"
+    t.integer  "document3_file_size"
+    t.datetime "document3_updated_at"
+    t.string   "document4_file_name"
+    t.string   "document4_content_type"
+    t.integer  "document4_file_size"
+    t.datetime "document4_updated_at"
+    t.string   "document5_file_name"
+    t.string   "document5_content_type"
+    t.integer  "document5_file_size"
+    t.datetime "document5_updated_at"
+    t.string   "document6_file_name"
+    t.string   "document6_content_type"
+    t.integer  "document6_file_size"
+    t.datetime "document6_updated_at"
+    t.string   "language",               :limit => 4, :default => "eng"
+    t.string   "currency",                            :default => "USD"
+  end
+
+  add_index "events", ["active"], :name => "index_events_on_active"
+  add_index "events", ["author_id"], :name => "index_events_on_author_id"
+  add_index "events", ["language"], :name => "index_events_on_language"
+  add_index "events", ["private_event"], :name => "index_events_on_private_event"
+  add_index "events", ["public_event"], :name => "index_events_on_public_event"
+  add_index "events", ["speaker_type"], :name => "index_events_on_speaker_type"
+  add_index "events", ["speakers_count"], :name => "index_events_on_speakers_count"
+
+  create_table "events_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "event_id"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "oganization"
+    t.string   "city"
+    t.string   "country"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "mobile_number"
+    t.string   "user_ip"
+    t.string   "user_id"
+    t.text     "body"
+    t.boolean  "unread",        :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["unread"], :name => "index_messages_on_unread"
+  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -54,6 +138,10 @@ ActiveRecord::Schema.define(:version => 20100524072059) do
     t.boolean  "admin",               :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["admin"], :name => "index_users_on_admin"

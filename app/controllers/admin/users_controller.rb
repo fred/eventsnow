@@ -3,6 +3,7 @@ class Admin::UsersController < Admin::BaseController
   # GET /admin/users
   # GET /admin/users.xml
   def index
+    @logged_users = User.last_logged
     @users = User.paginate :page => params[:page], 
       :per_page => @per_page, 
       :order => "id DESC"

@@ -24,6 +24,19 @@
       <%= show_field("Current IP", @user.current_login_ip) %>
     </fieldset>
     
+    <br clear="both"/>
+
+    <h3>Information about User (Bio) </h3>
+    <%= @user.notes %>
+
+    <br clear="both"/>
+
+    <% if @user.avatar.exists? %>
+      <br clear="both"/>
+      <h3>Current Photo</h3>
+      <%= image_tag(@user.avatar.url(:large)) %>
+    <% end %>
+    
   <br clear="both"/>
   <%= link_to image_tag("admin/edit_button.png"), edit_admin_user_path(@user) %>
   <%= link_to image_tag("admin/back_button.png"), admin_users_path %>

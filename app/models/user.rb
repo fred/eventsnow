@@ -1,7 +1,16 @@
 class User < ActiveRecord::Base
-  
   class DestroyDenied
   end
+  
+  has_and_belongs_to_many :events
+  
+  has_attached_file :avatar, 
+  :styles => { 
+    :large  => "240x240>", 
+    :medium => "160x160>", 
+    :small  => "120x120>", 
+    :thumb  => "64x64>" 
+  }
   
   acts_as_authentic
   

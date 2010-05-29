@@ -1,0 +1,43 @@
+<script type='text/javascript'>
+
+	$(document).ready(function() {
+	
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,basicWeek,basicDay'
+			},
+			editable: false,
+			events: [
+				{
+				  id: 991,
+					title: 'Nice Event',
+					start: new Date(y, m, d)
+				},
+				{
+				  id: 992,
+					title: 'Another Event 2 days',
+					start: new Date(y, m, d-5),
+					end: new Date(y, m, d-4)
+				},
+				{
+					id: 993,
+					title: 'Elections of USA',
+					start: new Date(y, m, d-3, 16, 0),
+					allDay: false
+				}
+			]
+		});
+		
+	});
+
+</script>
+
+<div id='calendar'></div>
+

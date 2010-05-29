@@ -1,0 +1,16 @@
+<h3> <%= @title = "#{t('new')} #{t('event')}"%> </h3>
+
+<% form_for(@event, :url => admin_events_path, :html => { :multipart => true }) do |f| %>
+
+  <%= f.error_messages %>
+  
+  <%= render :partial => 'form', :locals => { :f => f, :event => @event } %>
+
+  <p> 
+    <%= f.submit t('save') %>
+  </p>
+
+<% end %>
+
+<%= link_to image_tag("admin/back_button.png"), admin_events_path %>
+

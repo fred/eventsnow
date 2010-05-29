@@ -3,8 +3,8 @@ module ApplicationHelper
   
   def meta_language
     lang = I18n.locale
-    if lang.to_s.match("pt")
-      lang = "pt, pt-BR"
+    if lang.to_s.match("en")
+      lang = "en, en-US"
     end
     lang
   end
@@ -21,7 +21,22 @@ module ApplicationHelper
     logged_in? && current_user.admin?
   end
 
-
+  def boolean_to_money_small(bol)
+    if bol && (bol == true)
+      return image_tag("/images/money32.png", :class => "align-center")
+    else
+      return image_tag("/images/free32.png", :class => "align-center")
+    end
+  end
+  
+  def boolean_to_money(bol)
+    if bol && (bol == true)
+      return image_tag("/images/money48.png", :class => "align-center")
+    else
+      return image_tag("/images/free.png", :class => "align-center")
+    end
+  end
+  
   def boolean_to_image_lock(bol)
     if bol && (bol == true)
       return image_tag("/images/lock22.png", :class => "align-center")

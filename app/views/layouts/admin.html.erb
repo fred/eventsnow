@@ -12,7 +12,19 @@
     <%= stylesheet_link_tag 'admin/typography' %>
     <%= stylesheet_link_tag 'admin/table' %>
     <%= stylesheet_link_tag 'admin/pagination' %>
+    <%= stylesheet_link_tag "jquery_custom_theme.css" %>
+    <%= stylesheet_link_tag "fullcalendar.css" %>
+    
     <%= javascript_include_tag 'browser_detect' %>
+    <% if RAILS_ENV=="production" %>
+      <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
+    <% else %>
+      <%= javascript_include_tag "jquery.min.js" %>
+    <% end %>
+    <%= javascript_include_tag "jquery-ui-1.8.1.custom.min.js "%>
+    <%= javascript_include_tag "jquery.ui.datepicker.js" %>
+    <%= javascript_include_tag "fullcalendar.min.js" %>
+    
     <%= yield(:head) %>
   </head>
   <body>
@@ -46,6 +58,7 @@
             <ul><%= link_to(image_tag("admin/home_icon.png", :class => "home_icon"), admin_path ) %>
               <li><%= link_to t("home"), admin_path, :class => is_current_menu("dashboard") %></li>
               <li><%= link_to t("users"), admin_users_path, :class => is_current_menu("users") %></li>
+              <li><%= link_to t("events"), admin_events_path, :class => is_current_menu("events") %></li>
               <li><%= link_to t("settings"), admin_settings_path, :class => is_current_menu("settings") %></li>
             </ul>
           </div>

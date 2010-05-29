@@ -340,3 +340,7 @@ img.home_icon {
   background-color: #EEE;
   padding: 10px 0;
 }
+
+#calendar { 
+  width: 780px;
+}

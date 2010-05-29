@@ -111,14 +111,14 @@ input.inline	{display: inline; clear:none;}
 {
 	float: left;
 	display: block;
-	width: auto;
+	width: 360px;
 	margin: 0 0.8em 0.8em 0;
 	padding: 0.8em;
 	min-height: 150px;
 }
 
 #columnarForm fieldset.50-wider {
-	width: 20em;
+	width: 500px;
 }
 #columnarForm ul,
 #columnarForm ol {
@@ -149,11 +149,10 @@ input.inline	{display: inline; clear:none;}
 	padding-top: 1em;
 }
 
-#columnarForm select
-{
-	display: block;
+/*#columnarForm select {
+  display: block;
 }
-
+*/
 #horizontalForm fieldset
 {
 	display: block;

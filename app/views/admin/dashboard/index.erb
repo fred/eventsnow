@@ -1,8 +1,36 @@
-<h1><%= @title = "Welcome Back #{current_user.login}"%></h1>
+<script type='text/javascript'>
 
-<h3> Logged users in last 24 hrs:</h3>
-<% @logged_users.each do |user| %>
-  <p>
-    <strong><%= user.login %></strong> : <%= user.last_request_at.to_s %>
-  </p>
-<% end %>
+	$(document).ready(function() {
+	
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,basicWeek,basicDay'
+			},
+			editable: false,
+			events: [
+			<% Event.all.each do |event| %>
+				{
+				  id: <%= event.id %>,
+					title: "<%= event.title %> - <%= event.location %>",
+					start: "<%= event.start_date.strftime('%Y-%m-%d %H:%M:%S') %>",
+					end: "<%= event.end_date.strftime('%Y-%m-%d %H:%M:%S') %>",
+					url: "<%= url_for(admin_event_path(event)) %>"
+				},
+			<% end %>
+			]
+		});
+		
+	});
+
+</script>
+<h2><%= @title = "Welcome Back #{current_user.login}"%></h2>
+
+<br />
+<div id='calendar'></div>

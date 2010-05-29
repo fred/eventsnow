@@ -1,0 +1,54 @@
+<% @title ||= t("events") %>
+
+<table id="gradient-style">
+  <caption><%= @title %></caption>
+	<thead>
+    <tr>
+      <th>Title</th>
+      <th>Location</th>
+      <th>Phone</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Lang</th>
+      <th>Users</th>
+      <th>Access</th>
+      <th>Active</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+
+<% for event in @events %>
+  <tr>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_event_path(event)}'"%>>
+      <%= link_to(event.title, admin_event_path(event)) %>
+    </td>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_event_path(event)}'"%>>
+      <%= event.location %>
+    </td>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_event_path(event)}'"%>>
+      <%= event.phone_number %>
+    </td>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_event_path(event)}'"%>>
+      <%=h event.start_date.to_s(:short) %>
+    </td>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_event_path(event)}'"%>>
+      <%=h event.end_date.to_s(:short) %>
+    </td>
+    <td><%= event.language %></td>
+    <td><%= event.users.count %></td>
+    <td><%= boolean_to_money_small(event.private_event) %></td>
+    <td><%= boolean_to_image_small(event.active) %></td>
+    <td><%= link_to t('edit'), edit_admin_event_path(event) %></td>
+    <td><%= link_to t('del'), admin_event_path(event), :confirm => t('are_you_sure'), :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<div class='flickr_pagination'>
+    <%= will_paginate @events %>
+</div>
+
+<br />
+<%= link_to image_tag("admin/new_button.png"), new_admin_event_path %>

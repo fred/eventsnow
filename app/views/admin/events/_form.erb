@@ -1,0 +1,189 @@
+<script type="text/javascript" src="/javascripts/tiny_mce_jquery/tiny_mce.js"></script>
+
+<script type="text/javascript">
+
+function updateCheckBox(CheckBox, Value) {
+  document.forms[0].elements[CheckBox].checked=Value;
+}
+</script>
+
+<script type="text/javascript">
+tinyMCE.init({
+	mode : "exact",
+	elements : "event_description",
+	theme : "advanced",
+	skin : "o2k7",
+	plugins : "safari,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+	theme_advanced_buttons1 :  "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleprops,spellchecker,|,forecolor,backcolor",
+	theme_advanced_buttons2 :  "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,help,removeformat,cleanup,code,|,preview,fullscreen",
+	theme_advanced_buttons3 :  "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl",
+	theme_advanced_toolbar_location : "top",
+	theme_advanced_toolbar_align : "left",
+	theme_advanced_statusbar_location : "bottom",
+	theme_advanced_resizing : true,
+	template_replace_values : {
+		username : "<%= current_user.name %>",
+		staffid : "<%= current_user.id %>"
+	}
+});
+tinyMCE.init({
+	mode : "exact",
+	elements : "event_extra_description",
+	theme : "advanced",
+	skin : "o2k7",
+	plugins : "safari,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+	theme_advanced_buttons1 :  "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleprops,spellchecker,|,forecolor,backcolor",
+	theme_advanced_buttons2 :  "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,help,removeformat,cleanup,code,|,preview,fullscreen",
+	theme_advanced_buttons3 :  "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl",
+	theme_advanced_toolbar_location : "top",
+	theme_advanced_toolbar_align : "left",
+	theme_advanced_statusbar_location : "bottom",
+	theme_advanced_resizing : true,
+	template_replace_values : {
+		username : "<%= current_user.name %>",
+		staffid : "<%= current_user.id %>"
+	}
+});
+
+
+$(function() {
+	$("#event_start_date").datepicker({ altFormat:'yy-mm-dd', 
+    minDate: new Date(<%=Time.now.year%>,<%=Time.now.month-1%>,<%=Time.now.day-2%>)});
+	$("#event_end_date"  ).datepicker({ altFormat:'yy-mm-dd', 
+	  minDate: new Date(<%=Time.now.year%>,<%=Time.now.month-1%>,<%=Time.now.day-2%>)});
+});
+
+</script>
+
+
+<div id="columnarForm">
+
+  <fieldset>
+		<legend>Event Information</legend>
+		<p>
+    	<%= f.label :title, "Event Title" %> <br />
+    	<%= f.text_field :title %>
+    </p>
+    <p>
+    	<%= f.label :location, "Event Location" %> <br />
+    	<%= f.text_field :location %>
+    </p>
+    <p>
+    	<%= f.label :phone_number, "Contact Phone Number" %> <br />
+    	<%= f.text_field :phone_number %>
+    </p>
+	</fieldset>
+	
+	<fieldset>
+	  <legend>Dates / Language</legend>
+    <p>
+    	<%= f.label :start_date %> <br />
+    	<%= f.text_field :start_date %>
+    </p>
+    <p>
+    	<%= f.label :end_date %> <br />
+    	<%= f.text_field :end_date %>
+    </p>
+    <p>
+    	<%= f.label :language %> <br />
+      <%= f.select(:language, Event::LANGUAGES.collect {|p| p }, { :include_blank => false }) %>
+    </p>
+  </fieldset>
+	
+	<br /clear="both">
+	
+	<fieldset>
+	  <legend>Speakers</legend>
+    <p>
+    	<%= f.label :speaker_type, "Type of Speakers" %> <br />
+    	<%= f.select :speaker_type, 
+          Event::SPEAKER_TYPES.collect {|t| [t[:name], t[:id] ]}, 
+          :selected => @event.speaker_type
+      %>
+    </p>
+    <p>
+    	<%= f.label :speakers_count, "Number of Speakers"  %> <br />
+    	<%= f.select :speakers_count, [1,2,3,4,5,6,7,8,9,10,20].collect {|p| p }, { :include_blank => false } %>
+    </p>
+    <p>
+    	<%= f.label :maximum_users, "Number of Maximum allowed users"  %> <br />
+    	<%= f.select :maximum_users, [10,20,50,100,200].collect {|p| p } %>
+    </p>
+  </fieldset>
+	
+	<fieldset>
+	  <legend>Event Access</legend>
+	  <p>
+      <%= f.check_box :active %>
+    	<%= f.label :active, "Active (enabled/disabled)" %>
+    </p>
+    <p>
+    	<%= f.check_box :public_event, 
+    	    :onclick => "
+    	      updateCheckBox('event_private_event', false);
+    	      document.getElementById('price').style.display = 'none';" 
+    	%>
+    	<%= f.label :public_event %>
+    </p>
+    <p>
+    	<%= f.check_box :private_event, 
+    	    :onclick => "
+    	      updateCheckBox('event_public_event', false); 
+    	      document.getElementById('price').style.display = '';" 
+    	%>
+    	<%= f.label :private_event %> 
+    </p>
+    <p>
+    <span id="price" <%= "style='display:none;'" unless (@event.price && @event.private_event) %> > &nbsp;
+    	<%= f.label :price, "Event Price" %> <%= f.text_field :price, :size => 8  %>
+    	<%= f.select :currency, ["AUD","BHD","CND","EUR","USD"].collect {|p| p }, { :include_blank => false } %>
+    </span>
+    </p>
+  </fieldset>
+	
+	<br /clear="both">
+  <br /clear="both">
+  <p>
+  	<h3><%= f.label :description, "Required Description" %></h3>
+  	<%= f.text_area :description, :rows => 30 %>
+  </p>
+  
+  <br /clear="both">
+  <br /clear="both">
+  <p>
+  	<h3><%= f.label :extra_description, "Additional Description" %></h3>
+  	<%= f.text_area :extra_description %>
+  </p>
+  
+  <br /clear="both">
+  <br /clear="both">
+  <p>
+  	<h3><%= f.label :cil_code, "CoverItLive HTML Code" %></h3>
+  	<%= f.text_area :cil_code, :cols => 70, :rows => 20 %>
+  </p>
+  
+  <br /clear="both">
+  <br /clear="both">
+  <p>
+    <h3><%= f.label :cil_code_mobile, "CoverItLive HTML Code for Mobile and iPhone" %></h3>
+    <%= f.text_area :cil_code_mobile, :cols => 70, :rows => 20 %>
+  </p>
+  
+  <br /clear="both">
+  <br /clear="both">
+  <fieldset>
+	  <legend>Upload Files</legend>
+	  <p><em>Upload up to 6 files, maximum size 8MB each.</em></p>
+	  <p><em>Allowed Document files only</em></p>
+	  <br /clear="both">
+	  <p>File 1: <%= f.file_field :document1, :size => 10 %></p>
+	  <p>File 2: <%= f.file_field :document2, :size => 10 %></p>
+    <p>File 3: <%= f.file_field :document3, :size => 10 %></p>
+    <p>File 4: <%= f.file_field :document4, :size => 10 %></p>
+    <p>File 5: <%= f.file_field :document5, :size => 10 %></p>
+    <p>File 6: <%= f.file_field :document6, :size => 10 %></p>
+  </fieldset>
+  
+</div>
+
+<br clear="both"/>

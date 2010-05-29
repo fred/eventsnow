@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :events
+
 
   map.root :controller => "user_sessions", :action => "new"
   
@@ -17,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :settings
     admin.resources :users
+    admin.resources :events, :belongs_to => "author"
   end
   
   map.connect ':controller/:action/:id'
