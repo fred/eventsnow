@@ -59,12 +59,12 @@ class ApplicationController < ActionController::Base
   def get_locale_from_profile
     if current_user && current_user.default_language
       case current_user.default_language
-      when "Portugues"
-        session[:language] = "pt-BR"
+      when "Arabic"
+        session[:language] = "ar"
       when "English"
         session[:language] = "en"
       else
-        session[:language] = "pt-BR"
+        session[:language] = default_language
       end
       logger.debug "* Lang from user profile : #{current_user.default_language}"
     end
@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
   # params[:session] only accepts 'en' or 'th' (English or Thai)
   # otherwise get from user profile
   def get_locale
-    if (params[:language] && params[:language].to_s.match(/en|pt-BR/))
+    if (params[:language] && params[:language].to_s.match(/en|ar/))
       logger.debug "* Lang from headers : #{extract_locale_from_accept_language_header}"
       logger.debug "* session[:language] was: '#{session[:language]}'"
       session[:language] = params[:language]
@@ -155,16 +155,14 @@ class ApplicationController < ActionController::Base
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end
-
-
-
+    
     def extract_locale_from_accept_language_header
-      # if request.env['HTTP_ACCEPT_LANGUAGE'] && !request.env['HTTP_ACCEPT_LANGUAGE'].empty?
-      #   lang = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-      #   lang = "th" if lang.empty?
-      # end
+      if request.env['HTTP_ACCEPT_LANGUAGE'] && !request.env['HTTP_ACCEPT_LANGUAGE'].empty?
+        lang = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+        lang = "en" if lang.empty?
+      end
       # Should work for all browsers
-      lang = "pt-BR"
       return lang
     end
+    
 end

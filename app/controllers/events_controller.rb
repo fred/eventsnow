@@ -1,11 +1,12 @@
 class EventsController < ApplicationController
+  layout 'users'
   
   before_filter :authorized_only, :only => [:edit, :create, :destroy, :update]
   
   # GET /events
   # GET /events.xml
   def index
-    @events = Event.all
+    @events = Event.paginate :page => params[:page], :per_page => @per_page 
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,14 +1,27 @@
-<h1>Login</h1>
+<h2>Login</h2>
 
-<% form_for @user_session, :url => user_session_path do |f| %>
-  <%= f.error_messages %>
-  <%= f.label :login %><br />
-  <%= f.text_field :login %><br />
-  <br />
-  <%= f.label :password %><br />
-  <%= f.password_field :password %><br />
-  <br />
-  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
-  <br />
-  <%= f.submit "Login" %>
+<% form_for @user_session, :url => user_session_path do |form| %>
+  <% unless form.error_messages.empty? %>
+    <div class="error">
+      Login Failed.
+    </div>
+  <% end %>
+  <br clear="both"/>
+  
+  <%= form.label :login %>
+  <%= form.text_field :login, :class=>"wide" %>
+  <br clear="both"/>
+
+  <%= form.label :password %>
+  <%= form.password_field :password, :class=>"wide" %>
+  <br clear="both"/>
+  
+  <%= form.label :remember_me %>
+  <%= form.check_box :remember_me %>
+  <br clear="both"/>
+  
+  <%= form.submit "Login", :class=> "button" %>
+  
 <% end %>
+
+

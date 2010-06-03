@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="<%=meta_language%>" xml:lang="<%=meta_language%>">
+  <%= render :partial => "/shared/head" %>
+  <body>
+  	<div id="wrapper">
+  		<div id="header">
+  		  <%= render :partial => "/shared/nav" %>
+  		  
+  		  <div class="top_content">
+  		    <%= render :partial => "/shared/flash", :locals => {:flash => flash} %>
+  		    <div class="users">
+            <%= yield %>
+          </div>
+        </div>
+        
+  			<div class="clearfix"></div>
+  		</div><!--header-->
+  	</div><!--wrapper-->
+    
+    <%= render :partial => "/shared/mini_footer"%>
+  <!-- <script type="text/javascript">Cufon.now();</script> -->
+  </body>
+</html>

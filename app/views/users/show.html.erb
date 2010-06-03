@@ -1,39 +1,56 @@
-<h1> User Profile </h1>
+<div class="profile_body_full">
+  <h2> <%= @title || "Profile" %> <%= link_to(' - Edit Profile', edit_account_path) if (@user.id == current_user.id) %></h2>
 
-<p>
-  <b>Login:</b>
-  <%=h @user.login %>
-</p>
+  <div class="profile_image">
+    <% if @user.avatar.exists? %>
+      <br clear="both"/>
+      <%= image_tag(@user.avatar.url(:medium)) %>
+    <% end %>
+  </div>
 
-<p>
-  <b>Login count:</b>
-  <%=h @user.login_count %>
-</p>
+  <div class="profile_body">
+    <table>  
+      <tr>
+        <td>Login: </td>
+        <td><%=h @user.login %></td>
+      </tr>
+      <tr>
+        <td>Email: </td>
+        <td><%=h @user.email %></td>
+      </tr>
+      <tr>
+        <td>Full Name: </td>
+        <td><%=h @user.name %></td>
+      </tr>
+      <tr>
+        <td>Address: </td>
+        <td><%=h @user.address %></td>
+      </tr>
+      <tr>
+        <td>Phone: </td>
+        <td><%=h @user.phone %></td>
+      </tr>
+      <tr>
+        <td>TimeZone: </td>
+        <td><%=h @user.time_zone %></td>
+      </tr>
+    </table>
+  </div>
+</div>
 
-<p>
-  <b>Last request at:</b>
-  <%=h @user.last_request_at %>
-</p>
+<div class="profile_body_full">
+  <b>About Myself: </b>
+  <%= @user.notes %>
+</div>
 
-<p>
-  <b>Last login at:</b>
-  <%=h @user.last_login_at %>
-</p>
+<% if @user.last_login_at %>
+<div class="profile_body_full">
+  <p>
+    Last Login on: <%=h @user.last_login_at %> 
+    <br clear="both"/>
+    From:<%=h @user.last_login_ip %>
+  </p>
+</div>
+<% end %>
 
-<p>
-  <b>Current login at:</b>
-  <%=h @user.current_login_at %>
-</p>
-
-<p>
-  <b>Last login ip:</b>
-  <%=h @user.last_login_ip %>
-</p>
-
-<p>
-  <b>Current login ip:</b>
-  <%=h @user.current_login_ip %>
-</p>
-
-
-<p><%= link_to 'Edit', edit_account_path %></p>
+<br clear="both"/>

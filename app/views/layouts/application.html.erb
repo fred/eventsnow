@@ -1,117 +1,63 @@
 <!DOCTYPE html>
 <html lang="<%=meta_language%>" xml:lang="<%=meta_language%>">
-<head>
-	<meta http-equiv="content-language" content="<%=meta_language%>">
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=100; IE=8" >
-  <meta name="keywords" content="<%= Settings.site_meta_keywords.to_s + @keywords.to_s %>" />
-  <meta name="description" content="<%= Settings.site_meta_description.to_s + @description.to_s %>" />
-  <meta name="title" content="<%= Settings.site_meta_title.to_s + @title.to_s %>" />
-  <title> <%= @title || Settings.site_meta_title.to_s %> </title>
-  
-  <% if RAILS_ENV=="production" %>
-    <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
-  <% else %>
-    <%= javascript_include_tag "jquery.min.js" %>
-  <% end %>
-  
-  <%= javascript_include_tag "jquery-ui-1.8.1.custom.min.js "%>
-  <%= javascript_include_tag "jquery.ui.datepicker.js" %>
-  <%= javascript_include_tag "fullcalendar.min.js" %>
-  
-  <%= stylesheet_link_tag "jquery_custom_theme.css" %>
-  <%= stylesheet_link_tag "jquery_custom_theme.css" %>
-  <%= stylesheet_link_tag "fullcalendar.css" %>
-  <%= stylesheet_link_tag '/stylesheets/themes/Typography/stylesheet.css' %>
-  <%= yield(:head) %>
-	
-  <script type="text/javascript" src="/stylesheets/themes/Typography/js/cufon-yui.js"></script>
-  <script type="text/javascript" src="/stylesheets/themes/Typography/js/CartoGothic_Std_400-CartoGothic_Std_700-CartoGothic_Std_italic_400-CartoGothic_Std_italic_700.font.js">
-  </script>
-  <script type="text/javascript">
-    Cufon.replace('h1')('h2')('h4')('p');
-  </script>
-</head>
-<body>
-	<div id="wrapper">
-		<div id="header">
+  <%= render :partial => "/shared/head" %>
+  <body>
+  	<div id="wrapper">
+  		<div id="header">
+			  <%= render :partial => "/shared/nav" %>
+  			<%= render :partial => "/shared/top_calendar" %>
+  			<h2 class="header">
+  			  <span class="o">&quot;</span><span class="o">Events Now!</span>
+  			  Manage, Organize and participate events with style<span class="o">&quot;</span>
+  			</h2>
 			
-			<ul id="nav">
-			  <section>
-				<li><a href="/page/home">Home</a></li>
-				<li><a href="/page/contact">Contact</a></li>
-				<li><a href="/page/about">About</a></li>
-				<li><a href="/signup">Signup</a></li>
-				<li><a href="/login">Login</a></li>
-				</section>
-			</ul>
-			<%= render :partial => "/shared/top_calendar" %>
-			<h2>
-			  <span class="o">&quot;</span><span class="o">Events Now!</span>
-			  Manage, Organize and participate events with style<span class="o">&quot;</span>
-			</h2>
+  			<div class="clearfix"></div>
 			
-			<div class="clearfix"></div>
-			
-		</div><!--header-->
+  		</div><!--header-->
 		
-		<div id="content">
+  		<div id="content">
 			
-			<div class="box">
-				<h3>Featured Events</h3><span class="number">4 Events</span>
-				<div class="clearfix"></div>
-				<div class="sidenote left small">
-					<p class="o">001. All About Us</p>
-					<p>Everything you need to know, wrapped up in a little nutshell</p>
-				</div>
-				<div class="right big">
-					<p>Lorem ipsum dolor sit amet, <em>consectetur adipisicing elit</em>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-					<p>Excepteur <strong>sint occaecat</strong> cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					<p><a href="#">Read More...</a></p>
-				</div>
-			</div><!--about-->
+  			<div class="box">
+  				<h3>Featured Events</h3><span class="number">4 Events</span>
+  				<div class="clearfix"></div>
+  				<div class="sidenote left small">
+  					<p class="o">001. All About Us</p>
+  					<p>Everything you need to know, wrapped up in a little nutshell</p>
+  				</div>
+  				<div class="right big">
+  					<p>Lorem ipsum dolor sit amet, <em>consectetur adipisicing elit</em>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+  					<p>Excepteur <strong>sint occaecat</strong> cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  					<p><a href="#">Read More...</a></p>
+  				</div>
+  			</div><!--about-->
 			
-			<div class="box left small">
-				<h3>This Month</h3><span class="number">4</span>
-				<div class="clearfix"></div>
-				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim. <a href="#">Read More...</a></p>
-			</div><!--portfolio"-->
+  			<div class="box left small">
+  				<h3>This Month</h3><span class="number">4</span>
+  				<div class="clearfix"></div>
+  				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+  				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim. <a href="#">Read More...</a></p>
+  			</div><!--portfolio"-->
 			
-			<div class="box left small">
-				<h3>Next Month</h3><span class="number">7</span>
-				<div class="clearfix"></div>
-				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna eiusmod aliqua.</p>
-				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla voluptate pariatur.</p>
-				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui. <a href="#">Read More...</a></p>
-			</div><!--blog"-->
+  			<div class="box left small">
+  				<h3>Next Month</h3><span class="number">7</span>
+  				<div class="clearfix"></div>
+  				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna eiusmod aliqua.</p>
+  				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla voluptate pariatur.</p>
+  				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui. <a href="#">Read More...</a></p>
+  			</div><!--blog"-->
 			
-			<div class="box right small">
-				<h3>Past Events</h3><span class="number">72</span>
-				<div class="clearfix"></div>
-				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-				<p>Excepteur sint occaecat cupidatat non proident, sunt in. <a href="#">Read More...</a></p>
-			</div><!--contact"-->		
+  			<div class="box right small">
+  				<h3>Past Events</h3><span class="number">72</span>
+  				<div class="clearfix"></div>
+  				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  				<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+  				<p>Excepteur sint occaecat cupidatat non proident, sunt in. <a href="#">Read More...</a></p>
+  			</div><!--contact"-->		
 			
 			
-		</div><!--content-->
-	</div><!--wrapper-->
-	<div id="footer">
-		<div class="inner">
-			<img src="/images/themes/Typography/typ.png" alt="typ" />
-			<img src="/images/themes/Typography/og.png" alt="og" />
-			<img src="/images/themes/Typography/rap.png" alt="rap" />
-			<img class="right" src="/images/themes/Typography/hy.png" alt="hy" />
-			<p>01. Lorem ipsum sut dolor</p>
-			<p>02. Lorem ipsum sut dolor</p>
-			<p>03. Lorem ipsum sut dolor</p>
-			<p class="right">04. Lorem ipsum sut dolor</p>
-			<div class="clearfix"></div>
-			<div class="credits left">Copyright <span class="o">O’No!</span> Typography 2009</div>
-			<div class="credits right"><a href="http://www.flashmint.com/show-type-flash.html">Flash Templates</a>  by<a href="http://www.flashmint.com/">FlashMint</a></div>
-		</div>
-	</div><!--footer-->
-<script type="text/javascript">Cufon.now();</script>
-</body>
+  		</div><!--content-->
+  	</div><!--wrapper-->
+    <%= render :partial => "/shared/footer"%>
+  <!-- <script type="text/javascript">Cufon.now();</script> -->
+  </body>
 </html>

@@ -1,8 +1,47 @@
-<%= form.label :login %><br />
-<%= form.text_field :login %><br />
-<br />
-<%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />
-<%= form.password_field :password %><br />
-<br />
-<%= form.label :password_confirmation %><br />
-<%= form.password_field :password_confirmation %><br />
+<label> Email
+  <span class="small">
+    <%= form.error_message_on :email,
+      :prepend_text => "Email ",
+      :append_text => " Email must be valid.",
+      :css_class => "inputError" 
+    %>
+  </span>
+</label>
+<%= form.text_field :email, :class=>"wide" %>
+<br clear="both"/>
+
+<label> Login 
+  <span class="small">
+    <%= form.error_message_on :login,
+      :prepend_text => "Login ",
+      :append_text => ". You need a valid Login.",
+      :css_class => "inputError" 
+    %>
+  </span>
+</label>
+<%= form.text_field :login, :class=>"wide" %>
+<br clear="both"/>
+
+<label>
+  <%= form.object.new_record? ? "Password" : "Change password" %>
+  <span class="small">
+  <%= form.error_message_on :password,
+    :prepend_text => "Password ",
+    :append_text => ". You need a password.",
+    :css_class => "inputError" 
+  %>
+  </span>
+</label>
+<%= form.password_field :password, :class=>"wide" %>
+<br clear="both"/>
+
+<label> Password Confirmation 
+  <span class="small">
+  <%= form.error_message_on :password,
+    :prepend_text => "Password ",
+    :append_text => ".",
+    :css_class => "inputError" 
+  %>
+  </span>
+</label>
+<%= form.password_field :password_confirmation, :class=>"wide" %>

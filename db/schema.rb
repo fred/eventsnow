@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100527082021) do
+ActiveRecord::Schema.define(:version => 20100531072027) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -60,6 +60,10 @@ ActiveRecord::Schema.define(:version => 20100527082021) do
     t.datetime "document6_updated_at"
     t.string   "language",               :limit => 4, :default => "eng"
     t.string   "currency",                            :default => "USD"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "events", ["active"], :name => "index_events_on_active"
@@ -76,24 +80,25 @@ ActiveRecord::Schema.define(:version => 20100527082021) do
   end
 
   create_table "messages", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "oganization"
-    t.string   "city"
-    t.string   "country"
+    t.string   "subject"
+    t.string   "name"
     t.string   "email"
-    t.string   "phone_number"
-    t.string   "mobile_number"
-    t.string   "user_ip"
-    t.string   "user_id"
+    t.string   "phone"
+    t.string   "remote_ip"
+    t.integer  "user_id"
     t.text     "body"
-    t.boolean  "unread",        :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "messages", ["unread"], :name => "index_messages_on_unread"
-  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
+  create_table "pages", :force => true do |t|
+    t.string   "title"
+    t.string   "permalink"
+    t.text     "body"
+    t.integer  "language_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

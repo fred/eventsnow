@@ -1,0 +1,14 @@
+<ul id="nav">
+  <section>
+	<li><a href="/">Home</a></li>
+	<li><%= link_to "Contact", contact_path %></li>
+	<li><a href="/page/about">About</a></li>
+	<% if logged_in? %>
+    <li><%= link_to "Account", account_path %></li>
+    <li><%= link_to "Logout", logout_path %></li>	  
+  <% else %>
+	  <li><%= link_to "Signup", signup_path %></li>
+    <li><%= link_to "Login", login_path %></li>
+  <% end %>
+	</section>
+</ul>

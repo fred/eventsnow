@@ -1,0 +1,32 @@
+<head>
+	<meta http-equiv="content-language" content="<%=meta_language%>">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=100; IE=8" >
+  <meta name="keywords" content="<%= Settings.site_meta_keywords.to_s + @keywords.to_s %>" />
+  <meta name="description" content="<%= Settings.site_meta_description.to_s + @description.to_s %>" />
+  <meta name="title" content="<%= Settings.site_meta_title.to_s + @title.to_s %>" />
+  <title> <%= @title || Settings.site_meta_title.to_s %> </title>
+  
+  <% if RAILS_ENV=="production" %>
+    <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
+  <% else %>
+    <%= javascript_include_tag "jquery.min.js" %>
+  <% end %>
+  
+  <%= javascript_include_tag "jquery-ui-1.8.1.custom.min.js "%>
+  <%= javascript_include_tag "jquery.ui.datepicker.js" %>
+  <%= javascript_include_tag "fullcalendar.min.js" %>
+  
+  <%= stylesheet_link_tag "jquery_custom_theme.css" %>
+  <%= stylesheet_link_tag "jquery_custom_theme.css" %>
+  <%= stylesheet_link_tag "fullcalendar.css" %>
+  <%= stylesheet_link_tag '/stylesheets/themes/Typography/stylesheet.css' %>
+  <%= yield(:head) %>
+	
+  <!-- <script type="text/javascript" src="/stylesheets/themes/Typography/js/cufon-yui.js"></script>
+  <script type="text/javascript" src="/stylesheets/themes/Typography/js/CartoGothic_Std_400-CartoGothic_Std_700-CartoGothic_Std_italic_400-CartoGothic_Std_italic_700.font.js">
+  </script>
+  <script type="text/javascript">
+    Cufon.replace('h1')('h2')('h4')('p');
+  </script> -->
+</head>

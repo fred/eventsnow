@@ -1,0 +1,26 @@
+<div id="mini_footer">
+	<div class="inner_thin">
+		<div class="clearfix"></div>
+		<div class="credits left">Copyright <span class="o">Events Now!</span> 2010</div>
+		
+		<div class="credits right">		  
+        <%= link_to "English",  {:language => "eng"}, :class => "bold red" %> | 
+        <%= link_to "Arabic",   {:language => "ara"}, :class => "bold red" %> | 
+        <% if session[:mobile] %>
+          <%= link_to "Desktop",  {:desktop => "true"}, :class => "bold red" %> | 
+        <% end %>
+        <% if show_admin_content? %>
+          <%= link_to "Admin", admin_path %> |
+        <% end %>
+        <% if logged_in? %>
+          <%= link_to "Account", account_path %>
+          <%= link_to "Edit Profile", edit_account_path %>
+          <%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
+        <% else %>
+          <%= link_to "Signup", signup_path %>
+          <%= link_to "Login", login_path %>          
+        <% end %>
+		</div>
+    
+	</div>
+</div><!--footer-->

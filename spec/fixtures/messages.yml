@@ -1,0 +1,13 @@
+one:
+  subject: MyString
+  name: MyString
+  email: MyString
+  phone: MyString
+  body: MyText
+
+two:
+  subject: MyString
+  name: MyString
+  email: MyString
+  phone: MyString
+  body: MyText

@@ -1,0 +1,25 @@
+<% form_for @message do |f| %>
+
+  <% unless f.error_messages.empty? %>
+    <div class="error">
+      You must fill in all the required fields.
+    </div>
+  <% end %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.label :phone %>
+  <%= f.text_field :phone %>
+
+  <%= f.label :subject %>
+  <%= f.text_field :subject %>
+  
+  <%= f.label :body, "Message" %>
+  <%= f.text_area :body, :rows => 10 %>
+
+  <%= f.submit "Send", :class=> "button" %>
+<% end %>

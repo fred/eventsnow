@@ -1,12 +1,14 @@
-<h1>Editing event</h1>
+<h3> <%= @title ||= "Editing #{@event.title.to_s}" %> </h3>
 
-<% form_for(@event) do |f| %>
+<% form_for @event, :url => { :action => "update" }, :html => { :multipart => true } do |f| %>
+
   <%= f.error_messages %>
+  
+  <%= render :partial => 'form', :locals => { :f => f, :event => @event } %>
 
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+  <%= image_submit_tag "admin/save_button.png", :class => "button" %>
+  <%= link_to image_tag("admin/back_button.png"), admin_events_path %>
+
 <% end %>
 
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+

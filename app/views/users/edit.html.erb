@@ -1,7 +1,7 @@
-<h1>Edit My Account</h1>
-
-<% form_for @user, :url => account_path do |f| %>
-  <%= f.error_messages %>
-  <%= render :partial => "form", :object => f %>
-  <%= f.submit "Update" %>
+<% form_for @user, :url => account_path, :html => { :multipart => true } do |form| %>
+  <h2>Account</h2>
+  <p>Edit your account</p>
+  <br clear="both"/>
+  <%= render :partial => "edit_form", :locals => {:form => form} %>
+  <%= form.submit "Save", :class => "button" %>
 <% end %>

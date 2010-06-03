@@ -1,7 +1,14 @@
-<h1>Register</h1>
-
-<% form_for @user, :url => account_path do |f| %>
-  <%= f.error_messages %>
+<% form_for @user, :url => account_path, :html => { :multipart => true } do |f| %>
+  
+  <h2>Register</h2>
+  <p>Please register with us to join, create and manage events.</p>  
+  <% unless f.error_messages.empty? %>
+    <div class="error">
+      Please fill in all the required fields.
+    </div>
+  <% end %>
+  <br clear="both"/>
   <%= render :partial => "form", :object => f %>
-  <%= f.submit "Register" %>
+  <br clear="both"/>
+  <%= f.submit "Register", :class => "button" %>
 <% end %>
