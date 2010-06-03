@@ -1,56 +1,36 @@
 set :application, "eventsnow.at"
-
-# Primary domain name of your application. Used as a default for all server roles.
+set :repository,  "git@github.com:fred/eventsnow.git"
+set :branch, "master"
 set :domain, "eventsnow.at"
-
-# Login user for ssh.
+set :scm, :git
+set :deploy_via, :remote_cache
+set :rails_env, "production"
 set :user, "fred"
 set :use_sudo,  false
-
-set :scm, "git"
-
-# URL of your source repository.
-set :repository,  "git://github.com/fred/eventsnow.git "
-
-# Set Branch
-set :branch, "master"
-
-# We need to turn on the :pty option because it would seem we don’t get the passphrase prompt from git if we don’t. 
-# Point the :repository option to your github clone URL. 
-# Set the :passphrase to the one you generated in the initial step, and set :user to the one you just created.
-# If you’re using your own private keys for git you might want to tell Capistrano to use agent forwarding with this command
-ssh_options[:forward_agent] = true
-default_run_options[:pty] = true
-ssh_options[:paranoid] = false 
-
-# This will specify the branch that gets checked out for the deployment.
-# Older versions of git (e.g. 1.4.4.2) don’t support -q on git checkout command. 
-# This will cause your deployment to fail by default. To fix either upgrade git or do: set :scm_verbose, true 
-# You may also wish to use one of the following options if your git repo is very large – 
-#  otherwise each deploy will do a full repository clone every time. 
-#set :deploy_via, :remote_cache
-
-# Rails environment. Used by application setup tasks and migrate tasks.
-set :rails_env, "production"
-
-# mongrel port
-set :mongrel_port, "3001"
-
-
-#default_environment["PATH"] = "/opt/ree/bin:/opt/ree/lib/ruby/gems/1.8/bin:$PATH"
-
-# If you aren't deploying to /u/apps/#{application} on the target
-# servers (which is the default), you can specify the actual location
-# via the :deploy_to variable:
+#set :git_enable_submodules, 1
 set :deploy_to, "/var/www/apps/#{application}"
-
+set :mongrel_port, "3008"
 
 role :web, domain
 role :app, domain
 role :db,  domain, :primary => true
 role :scm, domain
 
+ssh_options[:forward_agent] = true
+default_run_options[:pty] = true
+ssh_options[:paranoid] = false
 
+# If you are using Passenger mod_rails uncomment this:
+# if you're still using the script/reapear helper you will need
+# these http://github.com/rails/irs_process_scripts
+
+# namespace :deploy do
+#   task :start do ; end
+#   task :stop do ; end
+#   task :restart, :roles => :app, :except => { :no_release => true } do
+#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+#   end
+# end
 
 namespace :thin do 
   desc "Stop this app's Thin Server" 
@@ -83,9 +63,10 @@ namespace(:customs) do
     run "ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"
   end
   task :symlink, :roles => :app do
-    run "ln -nfs #{shared_path}/assets/buletins #{current_path}/public/"
+    run "if [ -d #{current_path}/public/system ]; then rm -rf #{current_path}/public/system; fi"
     run "mkdir -p #{current_path}/tmp/cache"
     run "mkdir -p #{current_path}/tmp/sessions"
+    run "ln -nfs  #{shared_path}/system #{release_path}/public/system"
   end
 end
 
@@ -93,4 +74,3 @@ end
 after "deploy:symlink", "customs:config"
 after "deploy:symlink", "customs:symlink"
 after "deploy", "deploy:cleanup"
-

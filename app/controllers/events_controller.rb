@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  layout 'users'
+  # layout 'users'
   
   before_filter :authorized_only, :only => [:edit, :create, :destroy, :update]
   

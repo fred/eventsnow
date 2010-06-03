@@ -220,7 +220,7 @@ a:hover {color:#ff9000;}
 .users {
   color: #000;
 	margin:auto;
-	width:600px;
+	width:620px;
 	padding:15px 0 0 15px;
 	text-align:left;
 	float: left;
@@ -331,7 +331,9 @@ a:hover {color:#ff9000;}
 	margin: 15px 160px 15px 0;
 	padding: 0
 }
-
+.fieldWithErrors {
+  display: inline;
+}
 .fieldWithErrors select, 
 .fieldWithErrors textarea, 
 .fieldWithErrors input {

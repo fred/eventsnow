@@ -73,7 +73,8 @@ input,textarea {
 }
 
 .fieldWithErrors {
-  display: inline;
+  display: inline !important;
+  clear: none;
 }
 
 #errorExplanation {
