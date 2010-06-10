@@ -140,42 +140,43 @@ $(function() {
     </span>
     </p>
   </fieldset>
-	
-	<br /clear="both">
   <br /clear="both">
+
   <p>
   	<h3><%= f.label :description, "Required Description" %></h3>
   	<%= f.text_area :description, :rows => 30 %>
   </p>
   
-  <br /clear="both">
-  <br /clear="both">
   <p>
   	<h3><%= f.label :extra_description, "Additional Description" %></h3>
   	<%= f.text_area :extra_description %>
   </p>
-  
-  <br /clear="both">
-  <br /clear="both">
+
   <p>
   	<h3><%= f.label :cil_code, "CoverItLive HTML Code" %></h3>
   	<%= f.text_area :cil_code, :cols => 70, :rows => 20 %>
   </p>
-  
-  <br /clear="both">
-  <br /clear="both">
+
   <p>
     <h3><%= f.label :cil_code_mobile, "CoverItLive HTML Code for Mobile and iPhone" %></h3>
     <%= f.text_area :cil_code_mobile, :cols => 70, :rows => 20 %>
   </p>
   
-  <br /clear="both">
+  <h3><%= f.label :avatar, "Event Photo" %></h3>
+  <%= f.file_field :avatar %>
+  <br clear="both"/>
+  
+  <% if @event.avatar.exists? %>
+    <br clear="both"/>
+    <h3>Current Photo</h3>
+    <%= image_tag(@event.avatar.url(:large)) %>
+  <% end %>
   <br /clear="both">
   <fieldset>
 	  <legend>Upload Files</legend>
 	  <p><em>Upload up to 6 files, maximum size 8MB each.</em></p>
 	  <p><em>Allowed Document files only</em></p>
-	  <br /clear="both">
+	
 	  <p>File 1: <%= f.file_field :document1, :size => 10 %></p>
 	  <p>File 2: <%= f.file_field :document2, :size => 10 %></p>
     <p>File 3: <%= f.file_field :document3, :size => 10 %></p>

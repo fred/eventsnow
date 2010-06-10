@@ -1,0 +1,35 @@
+<%= render :partial => "/shared/admin/tiny_mce" %>
+
+<div id="columnarForm">
+  
+  <fieldset>
+		<legend>Title and Links </legend>
+		  <br />
+      <%= f.label :link_title %>
+      <br />
+      <%= f.text_field :link_title, :class => "wide" %>
+      <br />
+      <%= f.label :title %>
+      <br />
+      <%= f.text_field :title, :size => 30 %>
+      <br />
+      <%= f.label :permalink %>
+      <br />
+      <%= f.text_field :permalink, :size => 30 %>
+      <br />
+      <%= f.label :language, "Language" %>
+      <br />
+      <%= f.select(:language, Page::LANGUAGES.collect {|p| p }, { :include_blank => false }) %>
+      <br />
+  </fieldset>
+
+  <br clear="both"/>
+</div>
+  
+  <fieldset>
+    <legend>Content</legend>
+      <%= f.label :body %>
+    	<%= f.text_area :body, :rows => 20, :cols => 60 %>
+  </fieldset>
+  
+<br clear="both"/>

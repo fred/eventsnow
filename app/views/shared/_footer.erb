@@ -5,15 +5,13 @@
 		<img src="/images/themes/Typography/rap.png" alt="rap" />
 		<img class="right" src="/images/themes/Typography/hy.png" alt="hy" />
 		<p>01. Lorem ipsum sut dolor</p>
-		<p>02. Lorem ipsum sut dolor</p>
-		<p>03. Lorem ipsum sut dolor</p>
-		<p class="right">04. Lorem ipsum sut dolor</p>
+
 		<div class="clearfix"></div>
 		<div class="credits left">Copyright <span class="o">Events Now!</span> 2010</div>
 		
 		<div class="credits right">		  
-        <%= link_to "English",  {:language => "eng"}, :class => "bold red" %> | 
-        <%= link_to "Arabic",   {:language => "ara"}, :class => "bold red" %> | 
+        <%= link_to "English",  {:language => "en"}, :class => "bold red" %> | 
+        <%= link_to "Arabic",   {:language => "ar"}, :class => "bold red" %> | 
         <% if session[:mobile] %>
           <%= link_to "Desktop",  {:desktop => "true"}, :class => "bold red" %> | 
         <% end %>

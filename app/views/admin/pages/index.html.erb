@@ -1,0 +1,30 @@
+<% @title ||= "Displaying all pages" %>
+
+<table id="gradient-style">
+  <caption><%= @title %></caption>
+  <tr>
+    <th>Title</th>
+    <th>Permalink</th>
+		<th>Link Name</th>
+		<th>Lang</th>
+		<th>Updated</th>
+		<th> </th>
+		<th> </th>
+  </tr>
+
+<% for page in @pages %>
+  <tr class="<%=page.language%>">
+    <td><%= link_to page.title, admin_page_path(page) %></td>
+    <td><%=h page.permalink %></td>
+		<td><%=h page.link_title %></td>
+		<td><strong><%=h page.language %></strong></td>
+		<td><%=h page.updated_at.to_s(:short) %></td>
+    <td><%= link_to 'Edit', edit_admin_page_path(page) %></td>
+    <td><%= link_to 'Del', admin_page_path(page), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= link_to image_tag("new_button.png"), new_admin_page_path %>
+<br />

@@ -1,15 +1,16 @@
 class EventsController < ApplicationController
-  # layout 'users'
+  layout 'events'
   
-  before_filter :authorized_only, :only => [:edit, :create, :destroy, :update]
+  before_filter :require_user, :only => [:edit, :create, :destroy, :update, :new]
   
   # GET /events
   # GET /events.xml
   def index
+    
     @events = Event.paginate :page => params[:page], :per_page => @per_page 
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :layout => "application" } # index.html.erb
       format.xml  { render :xml => @events }
     end
   end
@@ -29,7 +30,6 @@ class EventsController < ApplicationController
   # GET /events/new.xml
   def new
     @event = Event.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @event }
@@ -83,5 +83,10 @@ class EventsController < ApplicationController
       format.html { redirect_to(events_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def js_enabled
+    session[:javascript_updated] = true
+    render :nothing => true 
   end
 end

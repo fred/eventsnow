@@ -1,6 +1,16 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
+  def javascript_enabled?
+    if session[:javascript_updated]
+      logger.debug "* Javascript is enabled"
+      true
+    else
+      logger.debug "* Javascript is disabled"
+      false
+    end
+  end
+  
   def meta_language
     lang = I18n.locale
     if lang.to_s.match("en")

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100531072027) do
+ActiveRecord::Schema.define(:version => 20100604092416) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -98,6 +98,8 @@ ActiveRecord::Schema.define(:version => 20100531072027) do
     t.integer  "language_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "language",    :default => "en"
+    t.string   "link_title"
   end
 
   create_table "sessions", :force => true do |t|

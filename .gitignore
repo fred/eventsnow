@@ -13,3 +13,4 @@ public/system
 *.bak
 *~
 config/database.yml
+*.zip

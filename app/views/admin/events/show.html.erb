@@ -53,32 +53,46 @@
     </tr>
   <% end %>
 </table>
-
 <br /clear="both">
+
 <p class="label"> Description:</p> 
-<br /clear="both"><%= @event.description %>
-
 <br /clear="both">
+<%= @event.description %>
+<br /clear="both">
+
 <p class="label"> Extra Description:</p>
-<br /clear="both"> <%= @event.extra_description %>
-
 <br /clear="both">
+<%= @event.extra_description %>
+<br /clear="both">
+
 <p class="label"> Cover it Live HTML CODE:</p>
-<br /clear="both"> <%= h @event.cil_code %>
-
 <br /clear="both">
+<%= h @event.cil_code %>
+<br /clear="both">
+
 <p class="label"> Cover it Live Result:</p>
-<br /clear="both"> <%= @event.cil_code %>
-
 <br /clear="both">
+<%= @event.cil_code %>
+<br /clear="both">
+
 <p class="label"> Cover it Live Mobile HTML CODE:</p>
-<br /clear="both"> <%= h @event.cil_code_mobile %>
-
 <br /clear="both">
-<p class="label"> Cover it Live Mobile Result:</p>
-<br /clear="both"> <%= @event.cil_code_mobile %>
+ <%= h @event.cil_code_mobile %>
+<br /clear="both">
 
-<br />
+<p class="label"> Cover it Live Mobile Result:</p>
+<br /clear="both">
+ <%= @event.cil_code_mobile %>
+<br /clear="both">
+
+<% if @event.avatar.exists? %>
+  <br clear="both"/>
+  <h3>Current Photo</h3>
+  <%= image_tag(@event.avatar.url(:large)) %>
+  <br /clear="both">
+<% end %>
+
+
 <h2>Files </h2>    
 <p> 
 File 1 : 
@@ -101,7 +115,6 @@ File 6 :
 </p>
 
 <br clear="both"/>
-
 
 
 <%= link_to 'Edit', edit_admin_event_path(@event) %> |

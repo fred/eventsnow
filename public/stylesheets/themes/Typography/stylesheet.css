@@ -78,13 +78,12 @@ body {
 h1 {font-size:50px;letter-spacing:-10px}
 
 h2.header {
-	width:340px;
+	width:360px;
 	float:left;
 	font-size:40px;
 	line-height:58px;
 	letter-spacing:-1px;
-	margin:30px 0 0 50px;
-	text-indent:-15px;
+	margin:30px 0 0 5px;
 }
 h3 {
 	float:left;
@@ -98,7 +97,12 @@ h3 {
 
 h4 {float:left;margin:0 0 20px 0;font-size:20px;}
 
-p {font-size:16px;line-height:24px;margin-bottom:24px;float:left;}
+p {
+  font-size:16px;
+  line-height:24px;
+  margin-bottom:24px;
+  clear:both;
+}
 
 em {font-style:italic;border-bottom:1px dashed;}
 strong {font-weight:bold;color:#ff9000;text-transform:uppercase;}
@@ -145,7 +149,9 @@ a:hover {color:#ff9000;}
 
 /*--- Header ---*/
 
-#header {height:500px}
+#header {height:540px}
+#header {text-decoration: none;}
+#header a {text-decoration: none;}
 #logo {float:left;margin:65px 0 0 0}
 
 
@@ -430,4 +436,61 @@ a:hover {color:#ff9000;}
   font-size: 1.2em;
   list-style: disc;
 	color: #222;
+}
+
+.events h1, 
+.events h2, 
+.events h3, 
+.events h4 {
+  font-size: 1.4em;
+  clear:both;
+  width: 100%;
+}
+.events h1 {font-size: 1.7em;}
+.events h2 {font-size: 1.5em;}
+.events h3 {font-size: 1.3em;}
+.events h4 {font-size: 1.2em;}
+
+.events p {
+  margin: 5px 0 10px 0;
+  clear:both;
+  width: 100%;
+}
+.events input { 
+  font-size:1.2em;
+	padding:2px;
+	border:solid 2px #aacfe4;
+	color: #444;
+}
+.events input.wide {
+	width:400px;
+}
+.events textarea {
+	float:left;
+	font-size:1.25em;
+	padding:4px;
+	border:solid 1px #aacfe4;
+	width:400px;
+	margin:2px 0 20px 10px;
+	color: #444;
+}
+
+.events input.button { 
+  border: 2px solid #000;
+	clear:both;
+	width:125px;
+	height:40px;
+	background-color:#222;
+	text-align:center;
+	color:#FFFFFF;
+	font-size:1.2em;
+	margin: 0;
+	font-weight:normal;
+	padding: 0
+}
+.events table {
+  float: left; 
+}
+.events table tr td {
+  padding: 2px 6px 8px 0;
 }

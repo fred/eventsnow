@@ -11,9 +11,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password, :password_confirmation
   
-  before_filter :get_locale, :store_location
-  
-  before_filter :set_iphone_format
+  before_filter :get_locale, :store_location, :set_iphone_format
   
   def is_iphone_request?
     request.user_agent.downcase =~ /(mobile\/.+safari)|(iphone)|(ipod)|(blackberry)|(symbian)|(series60)|(android)|(smartphone)|(wap)|(mobile)/
@@ -43,9 +41,9 @@ class ApplicationController < ActionController::Base
   end
   
   def authorized_only
+    flash[:notice] = "You must be logged in to access this page."
     redirect_to new_user_session_path unless authorized?
   end
-  
   
   
   ##################
@@ -147,11 +145,12 @@ class ApplicationController < ActionController::Base
       if params[:return_to]
         session[:return_to] = params[:return_to]
       else
-        session[:return_to] = request.request_uri
+        session[:return_to] = request.request_uri unless request.request_uri =~ /(js_check)|(session)|(login)/
       end
+      logger.debug "* Return URL: #{session[:return_to]}"
     end
     
-    def redirect_back_or_default(default)
+    def redirect_back_or_default(default=nil)
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end

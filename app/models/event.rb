@@ -1,10 +1,18 @@
 class Event < ActiveRecord::Base
   
-  LANGUAGES = ["eng", "ara"]
+  LANGUAGES = ["en", "ar"]
   SPEAKER_TYPES = [
     {:id => 0, :name => "Individual"},
     {:id => 1, :name => "Group"}
   ]
+  
+  has_attached_file :avatar, 
+  :styles => { 
+    :large  => "240x240>", 
+    :medium => "160x160>", 
+    :small  => "120x120>", 
+    :thumb  => "64x64>" 
+  }
   
   belongs_to :author, :class_name => "User", :foreign_key => "author_id"
   has_and_belongs_to_many :users

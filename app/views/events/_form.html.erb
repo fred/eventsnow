@@ -22,8 +22,8 @@ tinyMCE.init({
 	theme_advanced_statusbar_location : "bottom",
 	theme_advanced_resizing : true,
 	template_replace_values : {
-		username : "<%= current_user.name %>",
-		staffid : "<%= current_user.id %>"
+		username : "<%= current_user.login if current_user %>",
+		staffid : "<%= current_user.id if current_user %>"
 	}
 });
 tinyMCE.init({
@@ -40,8 +40,8 @@ tinyMCE.init({
 	theme_advanced_statusbar_location : "bottom",
 	theme_advanced_resizing : true,
 	template_replace_values : {
-		username : "<%= current_user.name %>",
-		staffid : "<%= current_user.id %>"
+		username : "<%= current_user.name if current_user %>",
+		staffid : "<%= current_user.id if current_user %>"
 	}
 });
 
@@ -55,120 +55,92 @@ $(function() {
 
 </script>
 
-
 <h3>Event Information</h3>
-<br clear="both"/>
-<%= f.label :title, "Event Title" %>
-<%= f.text_field :title %>
-<br clear="both"/>
-<%= f.label :location, "Event Location" %>
-<%= f.text_field :location %>
-<br clear="both"/>
-<%= f.label :phone_number, "Contact Phone Number" %>
-<%= f.text_field :phone_number %>
-<br clear="both"/>
-
-<h3>Dates / Language</h3>
-
-<%= f.label :start_date %>
-<%= f.text_field :start_date %>
-<br clear="both"/>
-<%= f.label :end_date %>
-<%= f.text_field :end_date %>
-<br clear="both"/>
-<%= f.label :language %>
-<%= f.select(:language, Event::LANGUAGES.collect {|p| p }, { :include_blank => false }) %>
-<br clear="both"/>
+<table>
+  <tr>
+    <td><%= f.label :title, "Event Title" %></td>
+    <td><%= f.text_field :title, :size => 20 %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :location, "Event Location" %></td>
+    <td><%= f.text_field :location, :size => 20 %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :phone_number, "Contact Number" %></td>
+    <td><%= f.text_field :phone_number, :size => 20 %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :start_date %></td>
+    <td>
+      <% if javascript_enabled? %>
+        <%= f.text_field :start_date, :size => 20 %>
+      <% else %>
+        <%= f.date_select :start_date %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td><%= f.label :end_date %></td>
+    <td>
+      <% if javascript_enabled? %>
+        <%= f.text_field :end_date, :size => 20 %>
+      <% else %>
+        <%= f.date_select :end_date %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td><%= f.label :language %></td>
+    <td><%= f.select(:language, Event::LANGUAGES.collect {|p| p }, { :include_blank => false }) %></td>
+  </tr>
+<table>
 
 <h3>Speakers</h3>
-<br clear="both"/>
-<%= f.label :speaker_type, "Type of Speakers" %>
-<%= f.select :speaker_type, 
-Event::SPEAKER_TYPES.collect {|t| [t[:name], t[:id] ]}, 
-:selected => @event.speaker_type
-%>
-
-<br clear="both"/>
-<%= f.label :speakers_count, "Number of Speakers"  %>
-<%= f.select :speakers_count, [1,2,3,4,5,6,7,8,9,10,20].collect {|p| p }, { :include_blank => false } %>
-
-<br clear="both"/>
-<%= f.label :maximum_users, "Number of Maximum allowed users"  %>
-<%= f.select :maximum_users, [10,20,50,100,200].collect {|p| p } %>
-<br clear="both"/>
+<p>
+  <%= f.label :speaker_type, "Type of Speakers" %>
+  <%= f.select :speaker_type, 
+    Event::SPEAKER_TYPES.collect {|t| [t[:name], t[:id] ]}, 
+    :selected => @event.speaker_type
+  %>
+  <br />
+  <%= f.label :speakers_count, "Number of Speakers"  %> 
+  <%= f.select :speakers_count, [1,2,3,4,5,6,7,8,9,10,20].collect {|p| p }, { :include_blank => false } %>
+  <br />
+  <%= f.label :maximum_users, "Number of Maximum allowed users"  %> 
+  <%= f.select :maximum_users, [10,20,50,100,200].collect {|p| p } %>
+</p>
 
 <h3>Event Access</h3>
-<br clear="both"/>
-<%= f.check_box :active %>
-<%= f.label :active, "Active (enabled/disabled)" %>
-<br clear="both"/>
-<%= f.check_box :public_event, 
-:onclick => "
-updateCheckBox('event_private_event', false);
-document.getElementById('price').style.display = 'none';" 
-%>
-<%= f.label :public_event %>
 
+<p>
+  <%= f.check_box :public_event, 
+    :onclick => "updateCheckBox('event_private_event', false); document.getElementById('price').style.display = 'none';" 
+  %>
+  <%= f.label :public_event %>
+  <br />
+  <%= f.check_box :private_event, 
+    :onclick => "updateCheckBox('event_public_event', false); document.getElementById('price').style.display = '';" 
+  %>
+  <%= f.label :private_event %> 
+  <br />
+  <span id="price" <%= "style='display:none;'" unless ((@event.price && @event.private_event) | !javascript_enabled?) %> > &nbsp;
+    <%= f.label :price, "Event Price" %> <%= f.text_field :price, :size => 8  %>
+    <%= f.select :currency, ["AUD","BHD","CND","EUR","USD"].collect {|p| p }, { :include_blank => false } %>
+  </span>
+</p>
 
-<%= f.check_box :private_event, 
-:onclick => "
-updateCheckBox('event_public_event', false); 
-document.getElementById('price').style.display = '';" 
-%>
-<%= f.label :private_event %> 
+<h3> <%= f.label :description, "Required Description" %> <h3>
+<p><%= f.text_area :description, :rows => 16 %></p>
+<br />
 
-
-<span id="price" <%= "style='display:none;'" unless (@event.price && @event.private_event) %> > &nbsp;
-<%= f.label :price, "Event Price" %> <%= f.text_field :price, :size => 8  %>
-<%= f.select :currency, ["AUD","BHD","CND","EUR","USD"].collect {|p| p }, { :include_blank => false } %>
-</span>
-
-
-<br clear="both"/>
-<br clear="both"/>
-
-<h3><%= f.label :description, "Required Description" %></h3>
-<%= f.text_area :description, :rows => 30 %>
-
-
-<br clear="both"/>
-<br clear="both"/>
-
-<h3><%= f.label :extra_description, "Additional Description" %></h3>
-<%= f.text_area :extra_description %>
-
-
-<br clear="both"/>
-<br clear="both"/>
-
-<h3><%= f.label :cil_code, "CoverItLive HTML Code" %></h3>
-<%= f.text_area :cil_code, :cols => 70, :rows => 20 %>
-
-
-<br clear="both"/>
-<br clear="both"/>
-
-<h3><%= f.label :cil_code_mobile, "CoverItLive HTML Code for Mobile and iPhone" %></h3>
-<%= f.text_area :cil_code_mobile, :cols => 70, :rows => 20 %>
-
-<br clear="both"/>
+<h3><%= f.label :extra_description, "Additional Description" %> </h3>
+<p><%= f.text_area :extra_description, :rows => 12 %></p>
 
 <h3>Upload Files</h3>
-<p>
-Upload up to 6 files, maximum size 8MB each.<br />
-Allowed Document files only
-</p>
-<br clear="both"/>
-File 1: <%= f.file_field :document1, :size => 10 %>
-<br clear="both"/>
-File 2: <%= f.file_field :document2, :size => 10 %>
-<br clear="both"/>
-File 3: <%= f.file_field :document3, :size => 10 %>
-<br clear="both"/>
-File 4: <%= f.file_field :document4, :size => 10 %>
-<br clear="both"/>
-File 5: <%= f.file_field :document5, :size => 10 %>
-<br clear="both"/>
-File 6: <%= f.file_field :document6, :size => 10 %>
-<br clear="both"/>
-
+<p> Upload up to 6 files, maximum size 8MB each. <br /> Allowed Document files only </p>
+<p> File 1: <%= f.file_field :document1, :size => 10 %> </p>
+<p> File 2: <%= f.file_field :document2, :size => 10 %> </p>
+<p> File 3: <%= f.file_field :document3, :size => 10 %> </p>
+<p> File 4: <%= f.file_field :document4, :size => 10 %> </p>
+<p> File 5: <%= f.file_field :document5, :size => 10 %> </p>
+<p> File 6: <%= f.file_field :document6, :size => 10 %> <p>

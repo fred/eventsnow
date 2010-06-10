@@ -1,46 +1,35 @@
 class PagesController < ApplicationController
-  layout 'users'
+  
+  layout "users"
   
   def index
-    @pages = Page.all
+    flash[:notice] = nil
+    flash[:error] = nil
+    @page = Page.find(:first, :conditions => ["language = ?", session[:language]])
+    # @page = @home_page
+    respond_to do |format|
+      format.html { render :action => :show }
+      format.xml  { render :xml => @page }
+    end
   end
   
   def show
-    @page = Page.find(params[:id])
-  end
-  
-  def new
-    @page = Page.new
-  end
-  
-  def create
-    @page = Page.new(params[:page])
-    if @page.save
-      flash[:notice] = "Successfully created page."
-      redirect_to @page
-    else
-      render :action => 'new'
+    flash[:notice] = nil
+    flash[:error] = nil
+    if params[:permalink]
+      @page = Page.find_permalink(params[:permalink])
+    end
+    
+    if params[:id] #&& authorized_admin?
+      @page = Page.find(params[:id])
+    end
+    
+    respond_to do |format|
+      format.html {
+        redirect_to(:action => "index", :language => session[:language]) if @page.language != session[:language]
+      }
+      format.xml  { render :xml => @page }
     end
   end
   
-  def edit
-    @page = Page.find(params[:id])
-  end
-  
-  def update
-    @page = Page.find(params[:id])
-    if @page.update_attributes(params[:page])
-      flash[:notice] = "Successfully updated page."
-      redirect_to @page
-    else
-      render :action => 'edit'
-    end
-  end
-  
-  def destroy
-    @page = Page.find(params[:id])
-    @page.destroy
-    flash[:notice] = "Successfully destroyed page."
-    redirect_to pages_url
-  end
 end

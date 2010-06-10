@@ -1,0 +1,16 @@
+<h2><%= @title ||= @page.title %></h2>
+
+<p>
+  Permalink: <%=h @page.permalink %>
+</p>
+
+<p>
+  Language: <%=h @page.language %>
+</p>
+
+<%= @page.body %>
+
+<br />
+<%= link_to image_tag("new_button.png"), new_admin_page_path %>
+<%= link_to image_tag("edit_button.png"), edit_admin_page_path(@page) %>
+<%= link_to image_tag("back_button.png"), admin_pages_path %>
