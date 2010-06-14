@@ -1,0 +1,20 @@
+<br clear="both"/>
+<br />
+<div class="users">
+  <h3>Already a Member? </h3>
+  <br /><br />
+  <% form_for @user_session, :url => user_session_path do |form| %>
+    <%= form.label :login %>
+    <%= form.text_field :login, :class=>"wide" %>
+    <br clear="both"/>
+    <%= form.label :password %>
+    <%= form.password_field :password, :class=>"wide" %>
+    <br clear="both"/>
+    <%= form.label :remember_me %>
+    <%= form.check_box :remember_me %>
+    <br clear="both"/>
+    <%= form.submit "Login", :class=> "button" %>
+
+  <% end %>
+
+</div>

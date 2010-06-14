@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def new
     @title = "Registration"
     @user = User.new
+    @user_session = UserSession.new
   end
   
   def create
@@ -55,4 +56,5 @@ class UsersController < ApplicationController
       render :action => :edit
     end
   end
+
 end

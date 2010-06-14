@@ -3,10 +3,6 @@
 	$(document).ready(function() {
 	
 		var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
-		
 		$('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
@@ -15,23 +11,16 @@
 			},
 			editable: false,
 			events: [
-				{
-				  id: 991,
-					title: 'Nice Event',
-					start: new Date(y, m, d)
-				},
-				{
-				  id: 992,
-					title: 'Another Event 2 days',
-					start: new Date(y, m, d-5),
-					end: new Date(y, m, d-4)
-				},
-				{
-					id: 993,
-					title: 'Elections of USA',
-					start: new Date(y, m, d-3, 16, 0),
-					allDay: false
-				}
+			<% @last_item = Event.last.id %>
+			<% Event.all.each do |t| %>
+        {
+        	id: <%= t.id %>,
+        	title: "<%= t.title %>",
+        	start: new Date(<%=t.start_date.year%>, <%=t.start_date.month-1%>, <%=t.start_date.day %>, <%=t.start_date.hour%>, <%=t.start_date.min%>),
+        	allDay: <%= t.allday %>,
+        	url: "<%= url_for t %>"
+        }<%= "," unless t.id == @last_item %>
+      <% end %>
 			]
 		});
 		

@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.xml
   def index
-    
+    @title ||= "Events"
     @events = Event.paginate :page => params[:page], :per_page => @per_page 
 
     respond_to do |format|
@@ -29,7 +29,9 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.xml
   def new
+    @title = "New Event"
     @event = Event.new
+    @event.owner_id = current_user.id
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @event }
@@ -38,17 +40,18 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
+    @event = current_user.own_events.find(params[:id])
   end
 
   # POST /events
   # POST /events.xml
   def create
     @event = Event.new(params[:event])
+    @event.owner_id = current_user.id
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
+        format.html { redirect_to(@event, :success => 'Thank you, your event has been submitted.') }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
         format.html { render :action => "new" }
@@ -60,11 +63,11 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.xml
   def update
-    @event = Event.find(params[:id])
-
+    @event = current_user.events.find(params[:id])
+    @event.owner_id = current_user.id
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        format.html { redirect_to(@event, :notice => 'Event was successfully updated.') }
+        format.html { redirect_to(@event, :success => 'Event was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -76,7 +79,7 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.xml
   def destroy
-    @event = Event.find(params[:id])
+    @event = current_user.events.find(params[:id])
     @event.destroy
 
     respond_to do |format|

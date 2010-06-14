@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   end
   
   has_and_belongs_to_many :events
+  has_many :own_events, :class_name => "Event", :foreign_key => "owner_id"
   
   has_attached_file :avatar, 
   :styles => { 

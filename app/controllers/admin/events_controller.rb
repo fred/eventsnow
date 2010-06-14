@@ -48,7 +48,7 @@ class Admin::EventsController < Admin::BaseController
     respond_to do |format|
       if @event.save
         format.html { 
-          redirect_to(admin_event_path(@event), :notice => 'Event was successfully created.') 
+          redirect_to(admin_event_path(@event), :success => 'Event was successfully created.') 
         }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
@@ -65,7 +65,7 @@ class Admin::EventsController < Admin::BaseController
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        format.html { redirect_to(edit_admin_event_path(@event), :notice => 'Event was successfully updated.') }
+        format.html { redirect_to(edit_admin_event_path(@event), :success => 'Event was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

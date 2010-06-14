@@ -1,108 +1,121 @@
-<h2><%= @title ||= @event.title %></h2>
-
-<table>
-  <tr>
-    <td class="label"> Title: </td>
-    <td> <%= @event.title %> </td>
-  </tr>
-  <tr>
-    <td class="label"> Location: </td>
-    <td> <%= @event.location %> </td>
-  </tr>
-  <tr>
-    <td class="label"> Phone Number: </td>
-    <td> <%= @event.phone_number %> </td>
-  </tr>
-  <tr>
-    <td class="label"> Start Date: </td>
-    <td> <%= @event.start_date %> </td>
-  </tr>
-  <tr>
-    <td class="label"> End Date: </td>
-    <td> <%= @event.end_date %> </td>
-  </tr>
+<div class="show_event">
   
-  <tr>
-    <td class="label"> Language: </td>
-    <td> <%= @event.language %> </td>
-  </tr>
-  <tr>
-    <td class="label"> Speaker Type: </td>
-    <td> <%= @event.show_speaker_type %> </td>
-  </tr>
-  <tr>
-    <td class="label"> Number of Speakers </td>
-    <td> <%= @event.speakers_count %> </td>
-  </tr>
-  <tr>
-    <td class="label"> Maximum Users: </td>
-    <td> <%= @event.maximum_users %> </td>
-  </tr>
-  <tr>
-    <td class="label"> Public Event </td>
-    <td> <%= boolean_to_image_small @event.public_event %> </td>
-  </tr>
-  <tr>
-    <td class="label"> Private Event </td>
-    <td> <%= boolean_to_image_small @event.private_event %> </td>
-  </tr>
-  <% if @event.private_event && @event.price %>
-    <tr>
-      <td class="label"> Event Price </td>
-      <td><%= @event.money.symbol %> <%= @event.money %> <%= @event.money.currency %></td>
-    </tr>
-  <% end %>
-</table>
+  <h2><%= @title ||= @event.title %></h2>
+  
+  <div class="event_image">
+    <% if @event.avatar.exists? %>
+      <br clear="both"/>
+      <%= image_tag(@event.avatar.url(:large)) %>
+    <% end %>
+  </div>
 
-<br /clear="both">
-<p class="label"> Description:</p> 
-<br /clear="both"><%= @event.description %>
+  <div class="event_body">
+  
+    <table class="events">
+      <tr>
+        <td class="label"> Location: </td>
+        <td> <%= @event.location %> </td>
+      </tr>
+      <tr>
+        <td class="label"> Phone Number: </td>
+        <td> <%= @event.phone_number %> </td>
+      </tr>
+      <tr>
+        <td class="label"> Start Date: </td>
+        <td> <%= @event.start_date.to_s(:short) %> </td>
+      </tr>
+      <tr>
+        <td class="label"> End Date: </td>
+        <td> <%= @event.end_date.to_s(:short) %> </td>
+      </tr>
+      <tr>
+        <td class="label"> Language: </td>
+        <td> <%= @event.language %> </td>
+      </tr>
+      <tr>
+        <td class="label"> Speaker Type: </td>
+        <td> <%= @event.show_speaker_type %> </td>
+      </tr>
+      <tr>
+        <td class="label"> Number of Speakers </td>
+        <td> <%= @event.speakers_count %> </td>
+      </tr>
+      <tr>
+        <td class="label"> Maximum Users: </td>
+        <td> <%= @event.maximum_users %> </td>
+      </tr>
+      <tr>
+        <td class="label"> Event Type </td>
+        <td> 
+          <%= "Public" if @event.public_event %>
+          <%= "Private" if @event.private_event %>
+        </td>
+      </tr>
+      <% if @event.private_event && @event.price %>
+        <tr>
+          <td class="label"> Event Price </td>
+          <td><%= @event.money.symbol %> <%= @event.money %> <%= @event.money.currency %></td>
+        </tr>
+      <% end %>
+    </table>
+    </div>
 
-<br /clear="both">
-<p class="label"> Extra Description:</p>
-<br /clear="both"> <%= @event.extra_description %>
+    <p class="label"> Description:</p> 
+    <%= @event.description %>
+    
+    <p class="label"> Extra Description:</p>
+    <%= @event.extra_description %>
+    
+    <p class="label"> Cover it Live HTML CODE:</p>
+    <%= h @event.cil_code %>
+    
+    <p class="label"> Cover it Live Result:</p>
+    <%= @event.cil_code %>
+    
+    <p class="label"> Cover it Live Mobile HTML CODE:</p>
+    <%= h @event.cil_code_mobile %>
+    
+    <p class="label"> Cover it Live Mobile Result:</p>
+    <%= @event.cil_code_mobile %>
 
-<br /clear="both">
-<p class="label"> Cover it Live HTML CODE:</p>
-<br /clear="both"> <%= h @event.cil_code %>
+    <h3> Available Files: </h3>    
+    <p> 
+    
+      <% if @event.document1.exists? %>
+        <br />
+        File 1 : 
+        <%= link_to(@event.document1_file_name, @event.document1.url) %>
+      <% end %>
+      
+      <% if @event.document2.exists? %>
+        <br />
+        File 2 : 
+        <%= link_to(@event.document2_file_name, @event.document2.url) %>
+      <% end %>
+      
+      <% if @event.document3.exists? %>
+        <br />
+        File 3 : 
+        <%= link_to(@event.document3_file_name, @event.document3.url) %>
+      <% end %>
+      
+      <% if @event.document4.exists? %>
+        <br />
+        File 4 : 
+        <%= link_to(@event.document4_file_name, @event.document4.url) %>
+      <% end %>
 
-<br /clear="both">
-<p class="label"> Cover it Live Result:</p>
-<br /clear="both"> <%= @event.cil_code %>
+      <% if @event.document5.exists? %>
+        <br />
+        File 5 : 
+        <%= link_to(@event.document5_file_name, @event.document5.url) %>
+      <% end %>
+    
+      <% if @event.document6.exists? %>
+        <br />
+        File 6 : 
+        <%= link_to(@event.document6_file_name, @event.document6.url) %>
+      <% end %>
+    </p>
 
-<br /clear="both">
-<p class="label"> Cover it Live Mobile HTML CODE:</p>
-<br /clear="both"> <%= h @event.cil_code_mobile %>
-
-<br /clear="both">
-<p class="label"> Cover it Live Mobile Result:</p>
-<br /clear="both"> <%= @event.cil_code_mobile %>
-
-<br />
-<h2>Files </h2>    
-<p> 
-File 1 : 
-<%= link_to(@event.document1_file_name, @event.document1.url) if @event.document1.exists? %>
-<br />
-File 2 : 
-<%= link_to(@event.document2_file_name, @event.document2.url) if @event.document2.exists? %>
-<br />
-File 3 : 
-<%= link_to(@event.document3_file_name, @event.document3.url) if @event.document3.exists? %>
-<br />
-File 4 : 
-<%= link_to(@event.document4_file_name, @event.document4.url) if @event.document4.exists? %>
-<br />
-File 5 : 
-<%= link_to(@event.document5_file_name, @event.document5.url) if @event.document5.exists? %>
-<br />
-File 6 : 
-<%= link_to(@event.document6_file_name, @event.document6.url) if @event.document6.exists? %>
-</p>
-
-<br clear="both"/>
-
-
-
-<%= link_to 'Edit', edit_admin_event_path(@event) %> |
-<%= link_to 'Back', admin_events_path %>
+</div>

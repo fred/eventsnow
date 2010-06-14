@@ -149,7 +149,7 @@ a:hover {color:#ff9000;}
 
 /*--- Header ---*/
 
-#header {height:540px}
+#header {height:580px}
 #header {text-decoration: none;}
 #header a {text-decoration: none;}
 #logo {float:left;margin:65px 0 0 0}
@@ -180,14 +180,14 @@ a:hover {color:#ff9000;}
 #footer {
 	float:left;
 	width:100%;
-	height:355px;
+	height:358px;
 	margin:50px 0 0 0;
 	background:url(/images/themes/Typography/footer-bg.png) bottom left repeat-x;
 }
 #mini_footer {
 	float:left;
 	width:100%;
-	height:140px;
+	height:150px;
 	margin:30px 0 0 0;
   background:url(/images/themes/Typography/footer-bg.png) bottom left repeat-x;
 }
@@ -337,14 +337,7 @@ a:hover {color:#ff9000;}
 	margin: 15px 160px 15px 0;
 	padding: 0
 }
-.fieldWithErrors {
-  display: inline;
-}
-.fieldWithErrors select, 
-.fieldWithErrors textarea, 
-.fieldWithErrors input {
-  border: 1px solid red;
-}
+
 
 .users table  {
   margin: 3px;
@@ -403,7 +396,7 @@ a:hover {color:#ff9000;}
 /* Errors */
 
 #errorExplanation {
-  width: 400px;
+  width: 90%;
   border: 2px solid #CF0000;
   padding: 0px;
   padding-bottom: 12px;
@@ -437,18 +430,27 @@ a:hover {color:#ff9000;}
   list-style: disc;
 	color: #222;
 }
+.events {
+  display: block;
+  float: left;
+}
+.events select {
+  padding-bottom: 2px;
+  font-size: 13px;
+}
 
 .events h1, 
 .events h2, 
 .events h3, 
 .events h4 {
-  font-size: 1.4em;
+  color: rgb(255, 144, 0);
   clear:both;
   width: 100%;
+  margin: 8px 0 8px 0;
 }
-.events h1 {font-size: 1.7em;}
-.events h2 {font-size: 1.5em;}
-.events h3 {font-size: 1.3em;}
+.events h1 {font-size: 1.9em;}
+.events h2 {font-size: 1.6em;}
+.events h3 {font-size: 1.4em;}
 .events h4 {font-size: 1.2em;}
 
 .events p {
@@ -488,9 +490,79 @@ a:hover {color:#ff9000;}
 	font-weight:normal;
 	padding: 0
 }
-.events table {
+table.events {
   float: left; 
 }
-.events table tr td {
-  padding: 2px 6px 8px 0;
+table.events tr td {
+  padding: 3px 4px 3px 2px;
+}
+
+.show_event {
+  color: #000;
+	margin:auto;
+	width:97%;
+	padding:15px;
+	text-align:left;
+	float: left;
+	font-size: 14px;
+  letter-spacing: 0px;
+  border:solid 2px #b7ddf2;
+	background:#ebf4fb;
+	margin-bottom: 10px;
+}
+
+.show_event .event_image {
+  float: left;
+  width: auto;
+  padding: 0 10px 15px 0;
+  margin:0;
+}
+.show_event .event_image img {
+  border: 2px solid #ccc;
+  padding: 2px;
+  margin:0;
+}
+.show_event .event_body {
+  padding: 15px 0px 15px 0;
+  float: left;
+  width: auto;
+  display:inline;
+}
+.show_event .event_body_full {
+  padding: 0px 0px 15px 5px;
+  float: left;
+  width: 100%;
+  display:inline;
+  clear: both
+}
+.show_event a {
+  color: #ff9000;
+}
+
+/* Noscript Notice */
+.noscript { 
+  border:1px solid #ddd; 
+  border-width:0 0 1px; 
+  background:#ffff90; 
+  font-size:12px; 
+  line-height:1.25; 
+  text-align:center; 
+  color:#2f2f2f; 
+}
+.noscript .noscript-inner { 
+  width:900px; 
+  margin:0 auto; 
+  padding:10px 0 10px; 
+  background:url("/images/i_notice.gif") 20px 50% no-repeat; 
+}
+.noscript p { margin:0; }
+
+
+.fieldWithErrors {
+  display: inline;
+}
+.fieldWithErrors select, 
+.fieldWithErrors textarea, 
+.fieldWithErrors input {
+  border-color: red;
 }

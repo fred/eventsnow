@@ -21,7 +21,10 @@
     <td class="label"> End Date: </td>
     <td> <%= @event.end_date %> </td>
   </tr>
-  
+  <tr>
+    <td class="label"> All Day: </td>
+    <td> <%= boolean_to_word @event.allday %> </td>
+  </tr>
   <tr>
     <td class="label"> Language: </td>
     <td> <%= @event.language %> </td>
@@ -115,7 +118,6 @@ File 6 :
 </p>
 
 <br clear="both"/>
-
 
 <%= link_to 'Edit', edit_admin_event_path(@event) %> |
 <%= link_to 'Back', admin_events_path %>

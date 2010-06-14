@@ -3,9 +3,11 @@ class MessagesController < ApplicationController
   layout 'users'
   
   def index
+    @title = "Thank you for your message"
   end
   
   def new
+    @title = "Leave us a Message"
     @message = Message.new
   end
   

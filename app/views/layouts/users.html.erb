@@ -11,6 +11,9 @@
   		    <div class="users">
             <%= yield %>
           </div>
+          <% if @user_session && !logged_in? %>
+            <%= render :partial => "/shared/login" %>
+          <% end %>
         </div>
         
   			<div class="clearfix"></div>

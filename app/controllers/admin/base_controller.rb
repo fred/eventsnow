@@ -1,6 +1,6 @@
 class Admin::BaseController < ApplicationController
 
-  before_filter :authorized_only
+  before_filter :require_admin
   
   before_filter :set_per_page
   

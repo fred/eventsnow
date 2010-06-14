@@ -1,15 +1,15 @@
-<h2> <%= @title = "#{t('new')} #{t('event')}"%> </h2>
-<br />
-
-<% form_for(@event, :url => admin_events_path, :html => { :multipart => true }) do |f| %>
-
-  <%= f.error_messages %>
+<div class="show_event">
+  <h2> <%= @title = "#{t('new')} #{t('event')}"%> </h2>
   
-  <%= render :partial => 'form', :locals => { :f => f, :event => @event } %>
+  <% form_for(@event, :html => { :multipart => true }) do |f| %>
 
-  <br />
-  <%= f.submit t('save'), :class => "button" %>
+    <%= f.error_messages %>
+  
+    <%= render :partial => 'form', :locals => { :f => f, :event => @event } %>
 
-<% end %>
+    <br />
+    <%= f.submit t('save'), :class => "button" %>
 
+  <% end %>
 
+</div>

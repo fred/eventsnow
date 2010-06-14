@@ -1,5 +1,7 @@
 class Event < ActiveRecord::Base
   
+  belongs_to :owner, :class_name => "User"
+  
   LANGUAGES = ["en", "ar"]
   SPEAKER_TYPES = [
     {:id => 0, :name => "Individual"},

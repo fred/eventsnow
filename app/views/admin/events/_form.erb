@@ -62,15 +62,15 @@ $(function() {
 		<legend>Event Information</legend>
 		<p>
     	<%= f.label :title, "Event Title" %> <br />
-    	<%= f.text_field :title %>
+    	<%= f.text_field :title, :class => "fieldset" %>
     </p>
     <p>
     	<%= f.label :location, "Event Location" %> <br />
-    	<%= f.text_field :location %>
+    	<%= f.text_field :location, :class => "fieldset" %>
     </p>
     <p>
     	<%= f.label :phone_number, "Contact Phone Number" %> <br />
-    	<%= f.text_field :phone_number %>
+    	<%= f.text_field :phone_number, :class => "fieldset" %>
     </p>
 	</fieldset>
 	
@@ -78,14 +78,18 @@ $(function() {
 	  <legend>Dates / Language</legend>
     <p>
     	<%= f.label :start_date %> <br />
-    	<%= f.text_field :start_date %>
+    	<%= f.datetime_select :start_date %>
     </p>
     <p>
     	<%= f.label :end_date %> <br />
-    	<%= f.text_field :end_date %>
+    	<%= f.datetime_select :end_date %>
     </p>
     <p>
-    	<%= f.label :language %> <br />
+      <%= f.check_box :allday %>
+      <%= f.label :allday, "All Day" %> 
+    </p>
+    <p>	
+      <%= f.label :language %> 
       <%= f.select(:language, Event::LANGUAGES.collect {|p| p }, { :include_blank => false }) %>
     </p>
   </fieldset>
@@ -118,6 +122,10 @@ $(function() {
     	<%= f.label :active, "Active (enabled/disabled)" %>
     </p>
     <p>
+      <%= f.check_box :featured %>
+    	<%= f.label :featured, "Featured Event" %>
+    </p>
+    <p>
     	<%= f.check_box :public_event, 
     	    :onclick => "
     	      updateCheckBox('event_private_event', false);
@@ -141,6 +149,8 @@ $(function() {
     </p>
   </fieldset>
   <br /clear="both">
+  
+  <p>Sponsor: <%= f.select(:owner_id, User.all.collect {|p| [p.login,p.id] }, { :include_blank => true }) %></p>
 
   <p>
   	<h3><%= f.label :description, "Required Description" %></h3>
@@ -154,12 +164,12 @@ $(function() {
 
   <p>
   	<h3><%= f.label :cil_code, "CoverItLive HTML Code" %></h3>
-  	<%= f.text_area :cil_code, :cols => 70, :rows => 20 %>
+  	<%= f.text_area :cil_code, :cols => 80, :rows => 24 %>
   </p>
 
   <p>
     <h3><%= f.label :cil_code_mobile, "CoverItLive HTML Code for Mobile and iPhone" %></h3>
-    <%= f.text_area :cil_code_mobile, :cols => 70, :rows => 20 %>
+    <%= f.text_area :cil_code_mobile, :cols => 80, :rows => 24 %>
   </p>
   
   <h3><%= f.label :avatar, "Event Photo" %></h3>

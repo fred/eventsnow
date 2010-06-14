@@ -56,44 +56,36 @@ $(function() {
 </script>
 
 <h3>Event Information</h3>
-<table>
+<table class="events">
   <tr>
     <td><%= f.label :title, "Event Title" %></td>
-    <td><%= f.text_field :title, :size => 20 %></td>
+    <td><%= f.text_field :title, :class => "wide" %></td>
   </tr>
   <tr>
     <td><%= f.label :location, "Event Location" %></td>
-    <td><%= f.text_field :location, :size => 20 %></td>
+    <td><%= f.text_field :location, :class => "wide" %></td>
   </tr>
   <tr>
     <td><%= f.label :phone_number, "Contact Number" %></td>
-    <td><%= f.text_field :phone_number, :size => 20 %></td>
+    <td><%= f.text_field :phone_number, :class => "wide" %></td>
   </tr>
   <tr>
     <td><%= f.label :start_date %></td>
-    <td>
-      <% if javascript_enabled? %>
-        <%= f.text_field :start_date, :size => 20 %>
-      <% else %>
-        <%= f.date_select :start_date %>
-      <% end %>
-    </td>
+    <td><%= f.datetime_select :start_date %></td>
   </tr>
   <tr>
     <td><%= f.label :end_date %></td>
-    <td>
-      <% if javascript_enabled? %>
-        <%= f.text_field :end_date, :size => 20 %>
-      <% else %>
-        <%= f.date_select :end_date %>
-      <% end %>
-    </td>
+    <td><%= f.datetime_select :end_date %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :allday, "All Day Event?" %></td>
+    <td><%= f.check_box :allday %> </td>
   </tr>
   <tr>
     <td><%= f.label :language %></td>
     <td><%= f.select(:language, Event::LANGUAGES.collect {|p| p }, { :include_blank => false }) %></td>
   </tr>
-<table>
+</table>
 
 <h3>Speakers</h3>
 <p>
@@ -129,12 +121,12 @@ $(function() {
   </span>
 </p>
 
-<h3> <%= f.label :description, "Required Description" %> <h3>
-<p><%= f.text_area :description, :rows => 16 %></p>
+<h3> <%= f.label :description, "Required Description" %> </h3>
+<p><%= f.text_area :description %></p>
 <br />
 
 <h3><%= f.label :extra_description, "Additional Description" %> </h3>
-<p><%= f.text_area :extra_description, :rows => 12 %></p>
+<p><%= f.text_area :extra_description %></p>
 
 <h3>Upload Files</h3>
 <p> Upload up to 6 files, maximum size 8MB each. <br /> Allowed Document files only </p>
@@ -143,4 +135,4 @@ $(function() {
 <p> File 3: <%= f.file_field :document3, :size => 10 %> </p>
 <p> File 4: <%= f.file_field :document4, :size => 10 %> </p>
 <p> File 5: <%= f.file_field :document5, :size => 10 %> </p>
-<p> File 6: <%= f.file_field :document6, :size => 10 %> <p>
+<p> File 6: <%= f.file_field :document6, :size => 10 %> </p>
