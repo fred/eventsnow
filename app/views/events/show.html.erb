@@ -78,44 +78,45 @@
     <p class="label"> Cover it Live Mobile Result:</p>
     <%= @event.cil_code_mobile %>
 
-    <h3> Available Files: </h3>    
-    <p> 
-    
-      <% if @event.document1.exists? %>
-        <br />
-        File 1 : 
-        <%= link_to(@event.document1_file_name, @event.document1.url) %>
-      <% end %>
+    <% if false %>
+      <h3> Available Files: </h3>    
+      <p>
+        <% if @event.document1.exists? %>
+          <br />
+          File 1 : 
+          <%= link_to(@event.document1_file_name, @event.document1.url) %>
+        <% end %>
       
-      <% if @event.document2.exists? %>
-        <br />
-        File 2 : 
-        <%= link_to(@event.document2_file_name, @event.document2.url) %>
-      <% end %>
+        <% if @event.document2.exists? %>
+          <br />
+          File 2 : 
+          <%= link_to(@event.document2_file_name, @event.document2.url) %>
+        <% end %>
       
-      <% if @event.document3.exists? %>
-        <br />
-        File 3 : 
-        <%= link_to(@event.document3_file_name, @event.document3.url) %>
-      <% end %>
+        <% if @event.document3.exists? %>
+          <br />
+          File 3 : 
+          <%= link_to(@event.document3_file_name, @event.document3.url) %>
+        <% end %>
       
-      <% if @event.document4.exists? %>
-        <br />
-        File 4 : 
-        <%= link_to(@event.document4_file_name, @event.document4.url) %>
-      <% end %>
+        <% if @event.document4.exists? %>
+          <br />
+          File 4 : 
+          <%= link_to(@event.document4_file_name, @event.document4.url) %>
+        <% end %>
 
-      <% if @event.document5.exists? %>
-        <br />
-        File 5 : 
-        <%= link_to(@event.document5_file_name, @event.document5.url) %>
-      <% end %>
+        <% if @event.document5.exists? %>
+          <br />
+          File 5 : 
+          <%= link_to(@event.document5_file_name, @event.document5.url) %>
+        <% end %>
     
-      <% if @event.document6.exists? %>
-        <br />
-        File 6 : 
-        <%= link_to(@event.document6_file_name, @event.document6.url) %>
-      <% end %>
-    </p>
+        <% if @event.document6.exists? %>
+          <br />
+          File 6 : 
+          <%= link_to(@event.document6_file_name, @event.document6.url) %>
+        <% end %>
+      </p>
+    <% end %>
 
 </div>

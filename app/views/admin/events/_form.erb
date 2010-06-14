@@ -153,12 +153,12 @@ $(function() {
   <p>Sponsor: <%= f.select(:owner_id, User.all.collect {|p| [p.login,p.id] }, { :include_blank => true }) %></p>
 
   <p>
-  	<h3><%= f.label :description, "Required Description" %></h3>
+  	<h3><%= f.label :description, "Short Description (required)" %></h3>
   	<%= f.text_area :description, :rows => 30 %>
   </p>
   
   <p>
-  	<h3><%= f.label :extra_description, "Additional Description" %></h3>
+  	<h3><%= f.label :extra_description, "Detailed Description" %></h3>
   	<%= f.text_area :extra_description %>
   </p>
 
@@ -181,6 +181,9 @@ $(function() {
     <h3>Current Photo</h3>
     <%= image_tag(@event.avatar.url(:large)) %>
   <% end %>
+  
+  
+  <% if false %>
   <br /clear="both">
   <fieldset>
 	  <legend>Upload Files</legend>
@@ -194,6 +197,7 @@ $(function() {
     <p>File 5: <%= f.file_field :document5, :size => 10 %></p>
     <p>File 6: <%= f.file_field :document6, :size => 10 %></p>
   </fieldset>
+  <% end %>  
   
 </div>
 

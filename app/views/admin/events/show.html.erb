@@ -95,27 +95,28 @@
   <br /clear="both">
 <% end %>
 
-
-<h2>Files </h2>    
-<p> 
-File 1 : 
-<%= link_to(@event.document1_file_name, @event.document1.url) if @event.document1.exists? %>
-<br />
-File 2 : 
-<%= link_to(@event.document2_file_name, @event.document2.url) if @event.document2.exists? %>
-<br />
-File 3 : 
-<%= link_to(@event.document3_file_name, @event.document3.url) if @event.document3.exists? %>
-<br />
-File 4 : 
-<%= link_to(@event.document4_file_name, @event.document4.url) if @event.document4.exists? %>
-<br />
-File 5 : 
-<%= link_to(@event.document5_file_name, @event.document5.url) if @event.document5.exists? %>
-<br />
-File 6 : 
-<%= link_to(@event.document6_file_name, @event.document6.url) if @event.document6.exists? %>
-</p>
+<% if false %>
+  <h2>Files </h2>    
+  <p> 
+    File 1 : 
+    <%= link_to(@event.document1_file_name, @event.document1.url) if @event.document1.exists? %>
+    <br />
+    File 2 : 
+    <%= link_to(@event.document2_file_name, @event.document2.url) if @event.document2.exists? %>
+    <br />
+    File 3 : 
+    <%= link_to(@event.document3_file_name, @event.document3.url) if @event.document3.exists? %>
+    <br />
+    File 4 : 
+    <%= link_to(@event.document4_file_name, @event.document4.url) if @event.document4.exists? %>
+    <br />
+    File 5 : 
+    <%= link_to(@event.document5_file_name, @event.document5.url) if @event.document5.exists? %>
+    <br />
+    File 6 : 
+    <%= link_to(@event.document6_file_name, @event.document6.url) if @event.document6.exists? %>
+  </p>
+<% end %>
 
 <br clear="both"/>
 

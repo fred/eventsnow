@@ -121,18 +121,20 @@ $(function() {
   </span>
 </p>
 
-<h3> <%= f.label :description, "Required Description" %> </h3>
+<h3> <%= f.label :description, "Short Description (required)" %> </h3>
 <p><%= f.text_area :description %></p>
 <br />
 
-<h3><%= f.label :extra_description, "Additional Description" %> </h3>
+<h3><%= f.label :extra_description, "Detailed Description" %> </h3>
 <p><%= f.text_area :extra_description %></p>
 
-<h3>Upload Files</h3>
-<p> Upload up to 6 files, maximum size 8MB each. <br /> Allowed Document files only </p>
-<p> File 1: <%= f.file_field :document1, :size => 10 %> </p>
-<p> File 2: <%= f.file_field :document2, :size => 10 %> </p>
-<p> File 3: <%= f.file_field :document3, :size => 10 %> </p>
-<p> File 4: <%= f.file_field :document4, :size => 10 %> </p>
-<p> File 5: <%= f.file_field :document5, :size => 10 %> </p>
-<p> File 6: <%= f.file_field :document6, :size => 10 %> </p>
+<% if false %>
+  <h3>Upload Files</h3>
+  <p> Upload up to 6 files, maximum size 8MB each. <br /> Allowed Document files only </p>
+  <p> File 1: <%= f.file_field :document1, :size => 10 %> </p>
+  <p> File 2: <%= f.file_field :document2, :size => 10 %> </p>
+  <p> File 3: <%= f.file_field :document3, :size => 10 %> </p>
+  <p> File 4: <%= f.file_field :document4, :size => 10 %> </p>
+  <p> File 5: <%= f.file_field :document5, :size => 10 %> </p>
+  <p> File 6: <%= f.file_field :document6, :size => 10 %> </p>
+<% end %>

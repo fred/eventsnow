@@ -42,12 +42,12 @@ class Event < ActiveRecord::Base
   has_attached_file   :document5
   has_attached_file   :document6
   
-  validates_attachment_size :document1, :less_than => 8.megabytes
-  validates_attachment_size :document2, :less_than => 8.megabytes
-  validates_attachment_size :document3, :less_than => 8.megabytes
-  validates_attachment_size :document4, :less_than => 8.megabytes
-  validates_attachment_size :document5, :less_than => 8.megabytes
-  validates_attachment_size :document6, :less_than => 8.megabytes
+  # validates_attachment_size :document1, :less_than => 8.megabytes
+  # validates_attachment_size :document2, :less_than => 8.megabytes
+  # validates_attachment_size :document3, :less_than => 8.megabytes
+  # validates_attachment_size :document4, :less_than => 8.megabytes
+  # validates_attachment_size :document5, :less_than => 8.megabytes
+  # validates_attachment_size :document6, :less_than => 8.megabytes
   
   
   def full_message
