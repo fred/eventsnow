@@ -52,6 +52,7 @@ blockquote, q {
 
 .left {float:left}
 .right {float:right;margin-right:0!important;}
+.right p {margin-top: 0}
 	
 .clearfix:after {
 	content: ".";
@@ -100,7 +101,6 @@ h4 {float:left;margin:0 0 20px 0;font-size:20px;}
 p {
   font-size:16px;
   line-height:24px;
-  margin-bottom:24px;
   clear:both;
 }
 
@@ -110,8 +110,21 @@ strong {font-weight:bold;color:#ff9000;text-transform:uppercase;}
 a {color:#fff;border-bottom:1px solid;}
 a:hover {color:#ff9000;}
 
-.o {color:#ff9000}
-
+.event_title {
+  color:#ff9000;
+  text-decoration: none;
+}
+.event_title a {
+  color:#ff9000;
+  text-decoration: none;
+}
+.event_location {
+  font-style: italic;
+  text-decoration: none;
+}
+.event_location a {
+  text-decoration:none;
+}
 .number {
 	float:right;
 	color:#fff;
@@ -161,7 +174,7 @@ a:hover {color:#ff9000;}
 	float:left;
 	width:100%;
 	margin: 0px 30px 0 0;
-	padding:10px 0 0 0;
+	padding: 10px 0 0 0;
 	background:url(/images/themes/Typography/box-bg.png) top left repeat-x
 }
 .small {width:300px;}
@@ -170,8 +183,8 @@ a:hover {color:#ff9000;}
 .sidenote p {
 	text-align:right;
 	font-size:20px;
-	line-height:24px;
-	margin:-1px 0 24px 0;
+/*  line-height:24px;*/
+	margin: 0 0 10px 0;
 	float:none;
 }
 

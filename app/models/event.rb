@@ -1,5 +1,7 @@
 class Event < ActiveRecord::Base
   
+  named_scope :featured, :conditions => {:featured => true}
+  
   belongs_to :owner, :class_name => "User"
   
   LANGUAGES = ["en", "ar"]

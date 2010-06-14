@@ -16,33 +16,39 @@
 			
   		</div><!--header-->
 		
+	    <% event = Event.featured.first %>
   		<div id="content">
 			
   			<div class="box">
-  				<h3>Featured Events</h3><span class="number">4 Events</span>
+  				<h3>Featured Events</h3><span class="number"><%= Event.featured.count %> Events</span>
   				<div class="clearfix"></div>
+  				
   				<div class="sidenote left small">
-  					<p class="o">001. All About Us</p>
-  					<p>Everything you need to know, wrapped up in a little nutshell</p>
+  					<p class="event_title"><%= link_to event.title, event %></p>
+  					<p class="event_location"><%= link_to event.location, event %></p>
+  					<p>
+  					  From: <%= event.start_date.to_s(:short) %>
+  					  <br />
+  					  To: <%= event.end_date.to_s(:short) %>
+  					</p>
   				</div>
   				<div class="right big">
-  					<p>Lorem ipsum dolor sit amet, <em>consectetur adipisicing elit</em>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-  					<p>Excepteur <strong>sint occaecat</strong> cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  					<p><a href="#">Read More...</a></p>
+  					  <%= event.description %>
   				</div>
+  				
   			</div><!--about-->
 			
   			<div class="box left small">
   				<h3>This Month</h3><span class="number">4</span>
   				<div class="clearfix"></div>
-  				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+  				<p><strong>27 Jun 09:00 </strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
   				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim. <a href="#">Read More...</a></p>
   			</div><!--portfolio"-->
 			
   			<div class="box left small">
   				<h3>Next Month</h3><span class="number">7</span>
   				<div class="clearfix"></div>
-  				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna eiusmod aliqua.</p>
+  				<p><strong>3 - 5 July</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna eiusmod aliqua.</p>
   				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla voluptate pariatur.</p>
   				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui. <a href="#">Read More...</a></p>
   			</div><!--blog"-->

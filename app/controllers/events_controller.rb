@@ -8,7 +8,6 @@ class EventsController < ApplicationController
   def index
     @title ||= "Events"
     @events = Event.paginate :page => params[:page], :per_page => @per_page 
-
     respond_to do |format|
       format.html { render :layout => "application" } # index.html.erb
       format.xml  { render :xml => @events }
