@@ -153,13 +153,13 @@ $(function() {
   <p>Sponsor: <%= f.select(:owner_id, User.all.collect {|p| [p.login,p.id] }, { :include_blank => true }) %></p>
 
   <p>
-  	<h3><%= f.label :description, "Short Description (required)" %></h3>
-  	<%= f.text_area :description, :rows => 30 %>
+  	<h3><%= f.label :description, "Short Description (required) - 500 chars" %></h3>
+  	<%= f.text_area :description, :rows => 20 %>
   </p>
   
   <p>
-  	<h3><%= f.label :extra_description, "Detailed Description" %></h3>
-  	<%= f.text_area :extra_description %>
+  	<h3><%= f.label :extra_description, "Detailed Description - 5000 Chars" %></h3>
+  	<%= f.text_area :extra_description, :rows => 50 %>
   </p>
 
   <p>
@@ -172,15 +172,14 @@ $(function() {
     <%= f.text_area :cil_code_mobile, :cols => 80, :rows => 24 %>
   </p>
   
-  <h3><%= f.label :avatar, "Event Photo" %></h3>
-  <%= f.file_field :avatar %>
+  <br />
   <br clear="both"/>
-  
+  <h3><%= f.label :avatar, "Event Photo" %></h3>
   <% if @event.avatar.exists? %>
-    <br clear="both"/>
-    <h3>Current Photo</h3>
     <%= image_tag(@event.avatar.url(:large)) %>
   <% end %>
+  <br clear="both"/>
+  <%= f.file_field :avatar %>
   
   
   <% if false %>

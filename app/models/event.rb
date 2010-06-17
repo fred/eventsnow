@@ -1,6 +1,14 @@
 class Event < ActiveRecord::Base
   
-  named_scope :featured, :conditions => {:featured => true}
+  named_scope :limit, lambda { |limit| { :limit => limit } }
+  
+  named_scope :featured,    :conditions => {:featured => true}
+  named_scope :not_featured,:conditions => {:featured => false}
+  named_scope :this_month,  :conditions => ["month(start_date) = ? AND year(start_date) = ?", Time.now.month,  Time.now.year ]
+  named_scope :next_month,  :conditions => ["month(start_date) = ? AND year(start_date) = ?", Time.now.month+1,Time.now.year ]
+  named_scope :last_month,  :conditions => ["month(start_date) = ? AND year(start_date) = ?", Time.now.month-1,Time.now.year ]
+  named_scope :finished,    :conditions => ["end_date < ?", Time.now+1.day ] # give one day for timezone mismatch
+  named_scope :unfinished,  :conditions => ["end_date > ?", Time.now-1.day ] # give one day for timezone mismatch  
   
   belongs_to :owner, :class_name => "User"
   
@@ -15,7 +23,7 @@ class Event < ActiveRecord::Base
     :large  => "240x240>", 
     :medium => "160x160>", 
     :small  => "120x120>", 
-    :thumb  => "64x64>" 
+    :thumb  => "80x80>"
   }
   
   belongs_to :author, :class_name => "User", :foreign_key => "author_id"
@@ -27,9 +35,9 @@ class Event < ActiveRecord::Base
   validates_presence_of :start_date
   validates_presence_of :end_date
   
-  validates_length_of :title,       :minimum => 6
-  validates_length_of :description, :minimum => 12
-  validates_length_of :location,    :minimum => 4
+  validates_length_of :title,       :in => 5..40
+  validates_length_of :description, :in => 10..800
+  validates_length_of :location,    :in => 4..30
   
   validates_numericality_of :speaker_type
   validates_numericality_of :speakers_count, :allow_nil => true
@@ -48,6 +56,22 @@ class Event < ActiveRecord::Base
   # validates_attachment_size :document4, :less_than => 8.megabytes
   # validates_attachment_size :document5, :less_than => 8.megabytes
   # validates_attachment_size :document6, :less_than => 8.megabytes
+  
+  def start_date_formatted
+    if self.allday
+      self.start_date.strftime("%d %B, %Y")
+    else
+      self.start_date.strftime("%d %b, %H:%M")
+    end
+  end
+  
+  def end_date_formatted
+    if self.allday
+      self.end_date.strftime("%d %B, %Y")
+    else
+      self.end_date.strftime("%d %b, %H:%M")
+    end
+  end
   
   
   def full_message

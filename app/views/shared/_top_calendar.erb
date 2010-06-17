@@ -10,14 +10,15 @@
 				right: 'month,basicWeek,basicDay'
 			},
 			editable: false,
+			weekMode: "variable",
 			events: [
 			<% @last_item = Event.last.id %>
 			<% Event.all.each do |t| %>
         {
         	id: <%= t.id %>,
-        	title: "<%= t.title %>",
-        	start: new Date(<%=t.start_date.year%>, <%=t.start_date.month-1%>, <%=t.start_date.day %>, <%=t.start_date.hour%>, <%=t.start_date.min%>),
-        	allDay: <%= t.allday %>,
+        	title: "<%= truncate(t.title, :length => 20) %>",
+        	start: new Date(<%=t.start_date.year%>, <%=t.start_date.month-1%>, <%=t.start_date.day %>),
+        	allDay: true,
         	url: "<%= url_for t %>"
         }<%= "," unless t.id == @last_item %>
       <% end %>

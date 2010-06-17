@@ -15,56 +15,99 @@
   			<div class="clearfix"></div>
 			
   		</div><!--header-->
-		
-	    <% event = Event.featured.first %>
+	    
   		<div id="content">
 			
   			<div class="box">
-  				<h3>Featured Events</h3><span class="number"><%= Event.featured.count %> Events</span>
-  				<div class="clearfix"></div>
+  				<h3>Featured Events</h3>
+  				<span class="number">
+  				  <%= Event.featured.this_month.unfinished.limit(4).count %> Events
+  				</span>
   				
-  				<div class="sidenote left small">
-  					<p class="event_title"><%= link_to event.title, event %></p>
-  					<p class="event_location"><%= link_to event.location, event %></p>
-  					<p>
-  					  From: <%= event.start_date.to_s(:short) %>
-  					  <br />
-  					  To: <%= event.end_date.to_s(:short) %>
-  					</p>
-  				</div>
-  				<div class="right big">
-  					  <%= event.description %>
-  				</div>
+  				<% Event.featured.this_month.unfinished.limit(4).each do |event| %>
   				
-  			</div><!--about-->
+    				<div class="clearfix line"></div>
+    				<div class="sidenote left small">
+    					<p class="event_title"><%= link_to event.title, event %></p>
+    					<p>
+    					  From: <%= event.start_date_formatted %> <br />
+    					  To: <%= event.end_date_formatted %>
+    					</p>
+    					<p class="event_location"><%= link_to event.location, event %></p>
+    				</div>
+    				
+    				<div class="right big">
+              <% if event.avatar.exists? %>
+                <div class="featured_event_image">
+                  <%= link_to image_tag(event.avatar.url(:small)), event %>
+                </div>
+              <% end %>
+              <div class="featured_event_text">
+    				    <%= event.description %>
+    				  </div>
+    				</div>
+    				
+    			<% end %>
+  				
+  			</div> 
+  			<!--Featured Events-->
 			
   			<div class="box left small">
-  				<h3>This Month</h3><span class="number">4</span>
-  				<div class="clearfix"></div>
-  				<p><strong>27 Jun 09:00 </strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-  				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim. <a href="#">Read More...</a></p>
-  			</div><!--portfolio"-->
+  				<h3>This Month</h3><span class="number"><%= Event.not_featured.this_month.unfinished.limit(4).count %></span>
+  				<% Event.not_featured.this_month.unfinished.limit(4).each do |event| %>
+    				<div class="clearfix"></div>
+    				<p>
+    				  <strong><%= event.start_date_formatted %></strong> &nbsp;
+    				  <%= link_to event.title, event %> <br />
+    				  <% if event.avatar.exists? %>
+                <div class="featured_event_image">
+                  <%= link_to image_tag(event.avatar.url(:thumb)), event %>
+                </div>
+              <% end %>
+    				  <%= truncate(strip_tags(event.description), :length => 210) %>
+    				  <%= link_to "Read More...", event %>
+    				</p>
+    				<br />
+    			<% end %>
+  			</div>
 			
   			<div class="box left small">
-  				<h3>Next Month</h3><span class="number">7</span>
-  				<div class="clearfix"></div>
-  				<p><strong>3 - 5 July</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna eiusmod aliqua.</p>
-  				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla voluptate pariatur.</p>
-  				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui. <a href="#">Read More...</a></p>
-  			</div><!--blog"-->
+  				<h3>Next Month</h3><span class="number"><%= Event.not_featured.next_month.unfinished.limit(4).count %></span>
+  				<% Event.not_featured.next_month.unfinished.limit(4).each do |event| %>
+    				<div class="clearfix"></div>
+    				<p>
+    				  <strong><%= event.start_date_formatted %></strong> &nbsp;
+    				  <%= link_to event.title, event %> <br />
+    				  <% if event.avatar.exists? %>
+                <div class="featured_event_image">
+                  <%= link_to image_tag(event.avatar.url(:thumb)), event %>
+                </div>
+              <% end %>
+    				  <%= truncate(strip_tags(event.description), :length => 150) %>
+    				  <%= link_to "Read More...", event %>
+    				</p>
+    				<br />
+    			<% end %>
+  			</div>
 			
   			<div class="box right small">
-  				<h3>Past Events</h3><span class="number">72</span>
-  				<div class="clearfix"></div>
-  				<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  				<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-  				<p>Excepteur sint occaecat cupidatat non proident, sunt in. <a href="#">Read More...</a></p>
-  			</div><!--contact"-->		
+  				<h3>Past Events</h3><span class="number"><%= Event.finished.limit(6).count %></span>
+  				<% Event.finished.limit(6).each do |event| %>
+    				<div class="clearfix"></div>
+    				<p>
+    				  <strong><%= event.start_date_formatted %></strong> &nbsp;
+    				  <%= link_to event.title, event %> <br />
+    				  <%= truncate(strip_tags(event.description), :length => 150) %>
+    				  <%= link_to "Read More...", event %>
+    				</p>
+    				<br />
+    			<% end %>
+  			</div>
 			
 			
   		</div><!--content-->
   	</div><!--wrapper-->
-    <%= render :partial => "/shared/footer"%>
+    <%= render :partial => "/shared/mini_footer"%>
   <!-- <script type="text/javascript">Cufon.now();</script> -->
   </body>
 </html>

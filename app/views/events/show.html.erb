@@ -22,11 +22,11 @@
       </tr>
       <tr>
         <td class="label"> Start Date: </td>
-        <td> <%= @event.start_date.to_s(:short) %> </td>
+        <td> <%= @event.start_date_formatted %> </td>
       </tr>
       <tr>
         <td class="label"> End Date: </td>
-        <td> <%= @event.end_date.to_s(:short) %> </td>
+        <td> <%= @event.end_date_formatted %> </td>
       </tr>
       <tr>
         <td class="label"> Language: </td>
@@ -60,22 +60,12 @@
     </table>
     </div>
 
-    <p class="label"> Description:</p> 
     <%= @event.description %>
-    
-    <p class="label"> Extra Description:</p>
+    <br />
     <%= @event.extra_description %>
-    
-    <p class="label"> Cover it Live HTML CODE:</p>
-    <%= h @event.cil_code %>
-    
-    <p class="label"> Cover it Live Result:</p>
+    <br />
     <%= @event.cil_code %>
-    
-    <p class="label"> Cover it Live Mobile HTML CODE:</p>
-    <%= h @event.cil_code_mobile %>
-    
-    <p class="label"> Cover it Live Mobile Result:</p>
+    <br />
     <%= @event.cil_code_mobile %>
 
     <% if false %>
