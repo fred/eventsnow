@@ -58,49 +58,62 @@
     				<div class="clearfix"></div>
     				<p>
     				  <strong><%= event.start_date_formatted %></strong> &nbsp;
-    				  <%= link_to event.title, event %> <br />
-    				  <% if event.avatar.exists? %>
-                <div class="featured_event_image">
-                  <%= link_to image_tag(event.avatar.url(:thumb)), event %>
-                </div>
-              <% end %>
-    				  <%= truncate(strip_tags(event.description), :length => 210) %>
-    				  <%= link_to "Read More...", event %>
-    				</p>
-    				<br />
+  				    <%= link_to event.title, event %>
+  				  </p>
+  				  <% if event.avatar.exists? %>
+              <div class="featured_event_image">
+                <%= link_to image_tag(event.avatar.url(:thumb)), event %>
+              </div>
+            <% end %>
+            <span class="featured_event_text">
+  				    <%= truncate(strip_tags(event.description), :length => 210) %>
+  				  </span>
+  				  <%= link_to "Read More...", event %>
+    				<br /><br />
     			<% end %>
   			</div>
 			
   			<div class="box left small">
-  				<h3>Next Month</h3><span class="number"><%= Event.not_featured.next_month.unfinished.limit(4).count %></span>
+  				<h3>Next Month</h3>
+  				<span class="number"><%= Event.not_featured.next_month.unfinished.limit(4).count %></span>
   				<% Event.not_featured.next_month.unfinished.limit(4).each do |event| %>
     				<div class="clearfix"></div>
     				<p>
     				  <strong><%= event.start_date_formatted %></strong> &nbsp;
-    				  <%= link_to event.title, event %> <br />
-    				  <% if event.avatar.exists? %>
-                <div class="featured_event_image">
-                  <%= link_to image_tag(event.avatar.url(:thumb)), event %>
-                </div>
-              <% end %>
-    				  <%= truncate(strip_tags(event.description), :length => 150) %>
-    				  <%= link_to "Read More...", event %>
+    				  <%= link_to event.title, event %>
     				</p>
-    				<br />
+    				<% if event.avatar.exists? %>
+              <div class="featured_event_image">
+                <%= link_to image_tag(event.avatar.url(:thumb)), event %>
+              </div>
+            <% end %>
+    				<span class="featured_event_text">
+    				  <%= truncate(strip_tags(event.description), :length => 150) %>
+    				</span>
+    				<%= link_to "Read More...", event %>
+    				<br /><br />
     			<% end %>
   			</div>
 			
-  			<div class="box right small">
-  				<h3>Past Events</h3><span class="number"><%= Event.finished.limit(6).count %></span>
+  			<div class="box left small">
+  				<h3>Past Events</h3>
+  				<span class="number"><%= Event.finished.limit(6).count %></span>
   				<% Event.finished.limit(6).each do |event| %>
     				<div class="clearfix"></div>
     				<p>
     				  <strong><%= event.start_date_formatted %></strong> &nbsp;
-    				  <%= link_to event.title, event %> <br />
-    				  <%= truncate(strip_tags(event.description), :length => 150) %>
-    				  <%= link_to "Read More...", event %>
+    				  <%= link_to event.title, event %>
     				</p>
-    				<br />
+  				  <% if event.avatar.exists? %>
+              <div class="featured_event_image">
+                <%= link_to image_tag(event.avatar.url(:thumb)), event %>
+              </div>
+            <% end %>
+            <span class="featured_event_text">
+  				    <%= truncate(strip_tags(event.description), :length => 150) %>
+  				  </span>
+  				  <%= link_to "Read More...", event %>
+    				<br /><br />
     			<% end %>
   			</div>
 			
