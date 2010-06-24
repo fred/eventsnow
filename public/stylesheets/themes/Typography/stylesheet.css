@@ -462,7 +462,7 @@ a:hover {color:#ff9000;}
   color: rgb(255, 144, 0);
   clear:both;
   width: 100%;
-  margin: 8px 0 8px 0;
+  margin: 8px 0 4px 0;
 }
 .events h1 {font-size: 1.9em;}
 .events h2 {font-size: 1.6em;}
@@ -511,6 +511,16 @@ table.events {
 }
 table.events tr td {
   padding: 3px 4px 3px 2px;
+}
+table.events tr td .inputError {
+  font-weight: normal;
+  color:red;
+}
+
+.inputError {
+  font-size: 1em;
+  font-weight:normal;
+  color:red;
 }
 
 .show_event {

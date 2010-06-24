@@ -38,7 +38,8 @@ class Event < ActiveRecord::Base
   validates_presence_of :start_date
   validates_presence_of :end_date
   validates_presence_of :sponsor_name
-  validates_presence_of :sponsor_email
+  # validates_presence_of :sponsor_email
+  validates_email_format_of :sponsor_email, :check_mx => true
   validates_presence_of :phone_number
   
   validates_length_of :title,       :in => 4..40

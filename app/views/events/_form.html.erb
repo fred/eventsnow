@@ -55,15 +55,30 @@ $(function() {
 
 </script>
 
+<br />
 <h3>Event Information</h3>
 <table class="events">
   <tr>
     <td><%= f.label :title, "Event Title" %></td>
     <td><%= f.text_field :title, :class => "wide" %></td>
+    <td>
+      <%= f.error_message_on :title,
+        :prepend_text => "Event Title ",
+        :append_text => "",
+        :css_class => "inputError" 
+      %>
+    </td>
   </tr>
   <tr>
     <td><%= f.label :location, "Event Location" %></td>
     <td><%= f.text_field :location, :class => "wide" %></td>
+    <td>
+      <%= f.error_message_on :location,
+        :prepend_text => "Event Location ",
+        :append_text => "",
+        :css_class => "inputError" 
+      %>
+    </td>
   </tr>
   <tr>
     <td><%= f.label :start_date %></td>
@@ -83,6 +98,8 @@ $(function() {
   </tr> -->
 </table>
 
+<br clear="both"/>
+<br />
 <h3>Speakers</h3>
 <p>
   <%= f.label :speaker_type, "Type of Speakers" %>
@@ -93,22 +110,24 @@ $(function() {
   %>
   <br />
   <%= f.label :speakers_count, "Number of Speakers"  %> 
-  <%= f.select :speakers_count, [1,2,3,4,5,6,7,8,9,10,20].collect {|p| p }, { :include_blank => false } %>
-  <br />
+  <%= f.select :speakers_count, [1,2,3,4,5,6].collect {|p| p }, { :include_blank => false } %>
+  <!-- <br />
   <%= f.label :maximum_users, "Number of Maximum allowed users"  %> 
-  <%= f.select :maximum_users, [10,20,50,100,200].collect {|p| p } %>
+  <%= f.select :maximum_users, [10,20,50,100,200].collect {|p| p } %> -->
 </p>
 
 <h3>Event Access</h3>
 
 <p>
-  <%= f.check_box :public_event, 
-    :onclick => "updateCheckBox('event_private_event', false); document.getElementById('price').style.display = 'none';" 
+  <%= f.check_box :public_event,
+    :onclick => "updateCheckBox('event_private_event', false);" 
+    #:onclick => "updateCheckBox('event_private_event', false); document.getElementById('price').style.display = 'none';" 
   %>
   <%= f.label :public_event %>
   <br />
-  <%= f.check_box :private_event, 
-    :onclick => "updateCheckBox('event_public_event', false); document.getElementById('price').style.display = '';" 
+  <%= f.check_box :private_event,
+    :onclick => "updateCheckBox('event_public_event', false);"
+    #:onclick => "updateCheckBox('event_public_event', false); document.getElementById('price').style.display = '';" 
   %>
   <%= f.label :private_event %> 
   <br />
@@ -118,7 +137,13 @@ $(function() {
   </span>
 </p>
 
+<br />
 <h3> <%= f.label :description, "Short Description (required)" %> </h3>
+<%= f.error_message_on :description,
+  :prepend_text => "The Event Description ",
+  :append_text => "",
+  :css_class => "inputError" 
+%>
 <p><%= f.text_area :description %></p>
 <br />
 
@@ -132,14 +157,35 @@ $(function() {
   <tr>
     <td><%= f.label :sponsor_name, "Your Name" %></td>
     <td><%= f.text_field :sponsor_name, :class => "wide" %></td>
+    <td>
+      <%= f.error_message_on :sponsor_name,
+        :prepend_text => "You Name ",
+        :append_text => "",
+        :css_class => "inputError" 
+      %>
+    </td>
   </tr>
   <tr>
     <td><%= f.label :sponsor_email, "Contact Email" %></td>
     <td><%= f.text_field :sponsor_email, :class => "wide" %></td>
+    <td>
+      <%= f.error_message_on :sponsor_email,
+        :prepend_text => "Email Address ",
+        :append_text => "",
+        :css_class => "inputError" 
+      %>
+    </td>
   </tr>
   <tr>
     <td><%= f.label :phone_number, "Contact Number" %></td>
     <td><%= f.text_field :phone_number, :class => "wide" %></td>
+    <td>
+      <%= f.error_message_on :phone_number,
+        :prepend_text => "Phone Number ",
+        :append_text => "",
+        :css_class => "inputError" 
+      %>
+    </td>
   </tr>
 </table>
 

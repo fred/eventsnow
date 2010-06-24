@@ -2,8 +2,6 @@
   <h2> <%= @title = "New Event"%> </h2>
   
   <% form_for(@event, :html => { :multipart => true }) do |f| %>
-
-    <%= f.error_messages %>
   
     <%= render :partial => 'form', :locals => { :f => f, :event => @event } %>
 
