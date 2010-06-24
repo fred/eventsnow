@@ -21,10 +21,10 @@
   			<div class="box">
   				<h3>Featured Events</h3>
   				<span class="number">
-  				  <%= Event.featured.this_month.unfinished.limit(4).count %> Events
+  				  <%= @featured_events.size %> Events
   				</span>
   				
-  				<% Event.featured.this_month.unfinished.limit(4).each do |event| %>
+  				<% @featured_events.each do |event| %>
   				
     				<div class="clearfix line"></div>
     				<div class="sidenote left small">
@@ -53,8 +53,8 @@
   			<!--Featured Events-->
 			
   			<div class="box left small">
-  				<h3>This Month</h3><span class="number"><%= Event.not_featured.this_month.unfinished.limit(4).count %></span>
-  				<% Event.not_featured.this_month.unfinished.limit(4).each do |event| %>
+  				<h3>This Month</h3><span class="number"><%= @this_month_events.size %></span>
+  				<% @this_month_events.each do |event| %>
     				<div class="clearfix"></div>
     				<p>
     				  <strong><%= event.start_date_formatted %></strong> &nbsp;
@@ -75,8 +75,8 @@
 			
   			<div class="box left small">
   				<h3>Next Month</h3>
-  				<span class="number"><%= Event.not_featured.next_month.unfinished.limit(4).count %></span>
-  				<% Event.not_featured.next_month.unfinished.limit(4).each do |event| %>
+  				<span class="number"><%= @next_month_events.size %></span>
+  				<% @next_month_events.each do |event| %>
     				<div class="clearfix"></div>
     				<p>
     				  <strong><%= event.start_date_formatted %></strong> &nbsp;
@@ -97,8 +97,8 @@
 			
   			<div class="box left small">
   				<h3>Past Events</h3>
-  				<span class="number"><%= Event.finished.limit(6).count %></span>
-  				<% Event.finished.limit(6).each do |event| %>
+  				<span class="number"><%= @past_events.size %></span>
+  				<% @past_events.each do |event| %>
     				<div class="clearfix"></div>
     				<p>
     				  <strong><%= event.start_date_formatted %></strong> &nbsp;
@@ -121,6 +121,5 @@
   		</div><!--content-->
   	</div><!--wrapper-->
     <%= render :partial => "/shared/mini_footer"%>
-  <!-- <script type="text/javascript">Cufon.now();</script> -->
   </body>
 </html>

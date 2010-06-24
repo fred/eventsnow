@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  
+  layout 'users'
+  
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:index, :show, :edit, :update]
   

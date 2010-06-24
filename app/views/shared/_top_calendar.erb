@@ -13,7 +13,7 @@
 			weekMode: "variable",
 			events: [
 			<% @last_item = Event.last.id %>
-			<% Event.all.each do |t| %>
+			<% @calendar_events.each do |t| %>
         {
         	id: <%= t.id %>,
         	title: "<%= truncate(t.title, :length => 20) %>",

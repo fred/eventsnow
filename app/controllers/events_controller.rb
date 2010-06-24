@@ -1,56 +1,59 @@
 class EventsController < ApplicationController
   layout 'events'
   
-  before_filter :require_user, :only => [:edit, :create, :destroy, :update, :new]
+  before_filter :require_admin, :only => [:edit, :destroy, :update]
   
-  # GET /events
-  # GET /events.xml
   def index
     @title ||= "Events"
-    @events = Event.paginate :page => params[:page], :per_page => @per_page 
+    @calendar_events = Event.approved
+    @featured_events = Event.approved.featured.this_month.unfinished.limit(4)
+    @this_month_events = Event.approved.not_featured.this_month.unfinished.limit(4)
+    @next_month_events = Event.approved.not_featured.next_month.unfinished.limit(4)
+    @past_events = Event.approved.finished.limit(6)
     respond_to do |format|
-      format.html { render :layout => "application" } # index.html.erb
+      format.html { render :layout => "application" }
       format.xml  { render :xml => @events }
     end
   end
-
-  # GET /events/1
-  # GET /events/1.xml
+  
   def show
     @event = Event.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @event }
+    if @event.active
+      respond_to do |format|
+        format.html
+        format.xml  { render :xml => @event }
+      end
+    else
+      flash[:notice] = "This Event is pending Approval."
+      respond_to do |format|
+        format.html { render :action => "thank_you"}
+        format.xml  { render :xml => @event }
+      end
     end
-  end
 
-  # GET /events/new
-  # GET /events/new.xml
+  end
+  
   def new
     @title = "New Event"
     @event = Event.new
-    @event.owner_id = current_user.id
+    @event.active = false
     respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.xml  { render :xml => @event }
     end
   end
-
-  # GET /events/1/edit
+  
   def edit
     @event = current_user.own_events.find(params[:id])
   end
-
-  # POST /events
-  # POST /events.xml
+  
   def create
     @event = Event.new(params[:event])
-    @event.owner_id = current_user.id
-
+    @event.active = false
     respond_to do |format|
       if @event.save
-        format.html { redirect_to(@event, :success => 'Thank you, your event has been submitted.') }
+        flash[:success] = "Thank you, your event has been submitted."
+        format.html { redirect_to(@event) }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
         format.html { render :action => "new" }
@@ -58,12 +61,9 @@ class EventsController < ApplicationController
       end
     end
   end
-
-  # PUT /events/1
-  # PUT /events/1.xml
+  
   def update
     @event = current_user.events.find(params[:id])
-    @event.owner_id = current_user.id
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to(@event, :success => 'Event was successfully updated.') }
@@ -74,9 +74,7 @@ class EventsController < ApplicationController
       end
     end
   end
-
-  # DELETE /events/1
-  # DELETE /events/1.xml
+  
   def destroy
     @event = current_user.events.find(params[:id])
     @event.destroy
@@ -91,4 +89,5 @@ class EventsController < ApplicationController
     session[:javascript_updated] = true
     render :nothing => true 
   end
+  
 end

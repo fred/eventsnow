@@ -2,6 +2,8 @@ class Event < ActiveRecord::Base
   
   named_scope :limit, lambda { |limit| { :limit => limit } }
   
+  named_scope :approved,    :conditions => {:active => true}
+  named_scope :unapproved,  :conditions => {:active => false}
   named_scope :featured,    :conditions => {:featured => true}
   named_scope :not_featured,:conditions => {:featured => false}
   named_scope :this_month,  :conditions => ["month(start_date) = ? AND year(start_date) = ?", Time.now.month,  Time.now.year ]
@@ -13,6 +15,7 @@ class Event < ActiveRecord::Base
   belongs_to :owner, :class_name => "User"
   
   LANGUAGES = ["en", "ar"]
+  
   SPEAKER_TYPES = [
     {:id => 0, :name => "Individual"},
     {:id => 1, :name => "Group"}
@@ -34,8 +37,11 @@ class Event < ActiveRecord::Base
   validates_presence_of :location
   validates_presence_of :start_date
   validates_presence_of :end_date
+  validates_presence_of :sponsor_name
+  validates_presence_of :sponsor_email
+  validates_presence_of :phone_number
   
-  validates_length_of :title,       :in => 5..40
+  validates_length_of :title,       :in => 4..40
   validates_length_of :description, :in => 10..800
   validates_length_of :location,    :in => 4..30
   

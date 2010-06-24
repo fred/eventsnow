@@ -66,10 +66,6 @@ $(function() {
     <td><%= f.text_field :location, :class => "wide" %></td>
   </tr>
   <tr>
-    <td><%= f.label :phone_number, "Contact Number" %></td>
-    <td><%= f.text_field :phone_number, :class => "wide" %></td>
-  </tr>
-  <tr>
     <td><%= f.label :start_date %></td>
     <td><%= f.datetime_select :start_date %></td>
   </tr>
@@ -81,10 +77,10 @@ $(function() {
     <td><%= f.label :allday, "All Day Event?" %></td>
     <td><%= f.check_box :allday %> </td>
   </tr>
-  <tr>
-    <td><%= f.label :language %></td>
+  <!-- <tr>
+    <td><%= f.label :language, "Event Language" %></td>
     <td><%= f.select(:language, Event::LANGUAGES.collect {|p| p }, { :include_blank => false }) %></td>
-  </tr>
+  </tr> -->
 </table>
 
 <h3>Speakers</h3>
@@ -92,7 +88,8 @@ $(function() {
   <%= f.label :speaker_type, "Type of Speakers" %>
   <%= f.select :speaker_type, 
     Event::SPEAKER_TYPES.collect {|t| [t[:name], t[:id] ]}, 
-    :selected => @event.speaker_type
+    :selected => @event.speaker_type,
+    :multiple => true
   %>
   <br />
   <%= f.label :speakers_count, "Number of Speakers"  %> 
@@ -128,6 +125,24 @@ $(function() {
 <h3><%= f.label :extra_description, "Detailed Description" %> </h3>
 <p><%= f.text_area :extra_description %></p>
 
+
+<h3>Contact Information</h3>
+
+<table class="events">
+  <tr>
+    <td><%= f.label :sponsor_name, "Your Name" %></td>
+    <td><%= f.text_field :sponsor_name, :class => "wide" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :sponsor_email, "Contact Email" %></td>
+    <td><%= f.text_field :sponsor_email, :class => "wide" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :phone_number, "Contact Number" %></td>
+    <td><%= f.text_field :phone_number, :class => "wide" %></td>
+  </tr>
+</table>
+
 <% if false %>
   <h3>Upload Files</h3>
   <p> Upload up to 6 files, maximum size 8MB each. <br /> Allowed Document files only </p>
@@ -138,3 +153,5 @@ $(function() {
   <p> File 5: <%= f.file_field :document5, :size => 10 %> </p>
   <p> File 6: <%= f.file_field :document6, :size => 10 %> </p>
 <% end %>
+
+<br clear="both"/>

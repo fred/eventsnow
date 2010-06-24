@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100614135727) do
+ActiveRecord::Schema.define(:version => 20100624042652) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(:version => 20100614135727) do
     t.integer  "owner_id"
     t.boolean  "allday",                              :default => false
     t.boolean  "featured",                            :default => false
+    t.string   "sponsor_email"
+    t.string   "sponsor_name"
   end
 
   add_index "events", ["active"], :name => "index_events_on_active"
@@ -77,9 +79,24 @@ ActiveRecord::Schema.define(:version => 20100614135727) do
   add_index "events", ["speaker_type"], :name => "index_events_on_speaker_type"
   add_index "events", ["speakers_count"], :name => "index_events_on_speakers_count"
 
+  create_table "events_features", :id => false, :force => true do |t|
+    t.integer "event_id"
+    t.integer "feature_id"
+  end
+
+  add_index "events_features", ["event_id"], :name => "index_events_features_on_event_id"
+  add_index "events_features", ["feature_id"], :name => "index_events_features_on_feature_id"
+
   create_table "events_users", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "event_id"
+  end
+
+  create_table "features", :force => true do |t|
+    t.string   "title"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "messages", :force => true do |t|
