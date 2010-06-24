@@ -12,12 +12,12 @@
 #calendar {
   float: right;
   position: relative;
-  right: 44px;
+  right: 1px;
   top: 24px;
   text-align: center;
   font-size: 14px;
   /* font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif; */
-  width: 520px;
+  width: 616px;
   margin: 0;
   padding: 0;
 }
@@ -307,7 +307,7 @@ table.fc-header {
   padding: 0;
 }
 .fc-event-title {
-	padding: 0 1px;
+	padding: 0 0px;
 }
 
 /* for fake rounded corners */
